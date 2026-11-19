@@ -55,7 +55,7 @@ Dev mode doesn't use up the weekly play time.
 
 Everything is saved on the device only. Nothing is sent anywhere.
 
-**Mascot version (test):** pick WITH PIP or NO MASCOT on the title screen (or open with `?mascot`). Activities become things you do with Pip (take Pip for a walk, put Pip to bed…). Pip gets hungry while you play; break activities and stopping on time feed it, playing a long time without a break makes it hungry. It never gets hungry while the game is closed. Code in `mascot.js`, the base game is unchanged when it's off.
+**Mascot version (test):** pick WITH PIP or NO MASCOT on the title screen (or open with `?mascot`). Activities become things you do with Pip (take Pip for a walk, put Pip to bed…). Pip has energy hearts: it gets tired while you play; doing a break activity together (each one has its own line: a walk, a song, a nap…) and stopping on time cheer it up, a long time without a break tires it. Nothing changes while the game is closed. Code in `mascot.js`, the base game is unchanged when it's off.
 
 Full documentation in Portuguese (for interviews and third parties): [DOCUMENTACAO.md](DOCUMENTACAO.md)
 

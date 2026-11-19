@@ -16,7 +16,7 @@ Há duas versões com a mesma interface. **Escolhe-se no ecrã inicial**, com os
 | Versão | Para quê |
 |---|---|
 | **Sem mascote** | O jogo com todas as ferramentas de pausa e fim de sessão |
-| **Com mascote (Pip)** | Igual, mais uma mascote que guia a criança e é alimentada pelas pausas. As atividades passam a ser feitas *com* o Pip |
+| **Com mascote (Pip)** | Igual, mais uma mascote que guia a criança e fica contente com as pausas feitas em conjunto. As atividades passam a ser feitas *com* o Pip |
 
 Também se pode abrir já com o Pip escolhido com `.../cube-hop/?mascot`, ou mudar em ⚙ Adultos → *Mascot*.
 
@@ -139,17 +139,17 @@ O tempo de jogo conta por semana (na versão final, assumimos que é medido pelo
 
 **Pergunta de investigação:** *faz sentido ter uma mascote que guia a criança a usar estas ferramentas?*
 
-Pip é um ursinho amarelo que aparece no topo do ecrã (com corações de comida) e nos cartões, a falar com a criança.
+Pip é um ursinho amarelo que aparece no topo do ecrã (com corações de energia) e nos cartões, a falar com a criança.
 
-| Situação | O que acontece ao Pip | Comida |
+| Situação | O que acontece ao Pip | Energia |
 |---|---|---|
-| Chega a hora da pausa | "O Pip ficou com fome de tanto saltar! Faz uma atividade para o alimentar" | −1 (só a primeira vez, não quando volta depois de adiada) |
-| Atividade **bem feita** | "Nham! Obrigado por alimentares o Pip!" (fica contente) | +2 |
-| Desiste da atividade (↩ Voltar) | "Não faz mal! O Pip ainda tem um bocadinho de fome" (sem ralhar) | 0 |
+| Chega a hora da pausa | O Pip pede uma das atividades ligadas, ex. "O Pip quer ir passear! Vamos levá-lo a dar uma volta?" (a lista continua a mostrar todas) | −1 (só a primeira vez, não quando volta depois de adiada) |
+| Atividade **bem feita** | Uma frase sobre o que fizeram juntos, ex. "Que passeio tão bom! O Pip esticou as patas." / "O Pip adorou a tua música!" (fica contente) | +2 |
+| Desiste da atividade (↩ Voltar) | "Não faz mal! O Pip ainda está um bocadinho cansado" (sem ralhar) | 0 |
 | Acalma-se depois de um abanão | "O Pip também está calmo" | +1 |
 | Abana o telemóvel com raiva | O Pip fica assustado enquanto os controlos estão trocados | — |
 | Adia a pausa ("Agora não") | Quando a pausa volta: "O Pip ainda está à espera de uma pausa…" | 0 |
-| Joga muito tempo sem pausa | O Pip fica com mais fome a cada passo da fricção (10, 12, 14, 16 min) | −1 por passo |
+| Joga muito tempo sem pausa | O Pip fica mais cansado a cada passo da fricção (10, 12, 14, 16 min) | −1 por passo |
 | Pára a tempo (qualquer botão de parar, ou termina o nível nos 2 min) | "Obrigado por parares a tempo! O Pip vai dormir" | +1 |
 | Acabou o tempo | "O Pip está com sono. Vamos acabar o nível e descansar!" | — |
 | Os 2 minutos para terminar o nível passam | "O Pip vai dormir. Da próxima vez, vamos parar um pouco mais cedo!" | 0 |
@@ -159,14 +159,14 @@ Pip é um ursinho amarelo que aparece no topo do ecrã (com corações de comida
 **Humor do Pip:** 4–5 contente · 2–3 normal · 0–1 triste (mais pálido) · assustado durante o abanão · a dormir no cartão final.
 
 **Decisões de design (para discutir nas entrevistas):**
-- **O Pip nunca fica com fome enquanto o jogo está fechado.** Ao contrário de um Tamagotchi, não há nada que puxe a criança de volta ao jogo.
+- **O Pip nunca perde energia enquanto o jogo está fechado.** Ao contrário de um Tamagotchi, não há nada que puxe a criança de volta ao jogo.
 - O Pip **dorme no fim da sessão**: parar de jogar é apresentado como algo bom para a mascote, não como uma perda.
-- Falhar, desistir ou adiar uma atividade **não tira comida**, só não dá. Só jogar muito tempo seguido sem pausa a tira.
-- A comida fica guardada entre sessões e não há prémio por ter a barra cheia.
+- Falhar, desistir ou adiar uma atividade **não tira energia**, só não dá. Só jogar muito tempo seguido sem pausa a tira.
+- A energia fica guardada entre sessões e não há prémio por ter a barra cheia.
 
 **Perguntas sugeridas para as entrevistas:**
-1. A criança percebeu que as atividades alimentam o Pip? Fez as pausas mais vezes por causa disso?
-2. Ficou triste ou ansiosa quando o Pip ficou com fome? (risco de culpa)
+1. A criança percebeu que as atividades deixam o Pip contente? Fez as pausas mais vezes por causa disso?
+2. Ficou triste ou ansiosa quando o Pip ficou cansado? (risco de culpa)
 3. Ver o Pip a dormir ajudou a aceitar o fim do jogo?
 4. Os pais preferem a versão com ou sem mascote? Porquê?
 5. O Pip devia ter nome/aspeto escolhido pela criança?
@@ -219,7 +219,7 @@ Isto é só para quem desenvolve o jogo (não há opção no painel dos adultos)
 
 - Nada é enviado para lado nenhum. Não há contas, servidores nem analítica.
 - Câmara e microfone só são usados **durante** a atividade correspondente e desligam-se logo a seguir. As imagens são analisadas no telemóvel e não são guardadas.
-- Progresso, definições, tempo semanal e comida do Pip ficam no `localStorage` do browser.
+- Progresso, definições, tempo semanal e energia do Pip ficam no `localStorage` do browser.
 
 ---
 

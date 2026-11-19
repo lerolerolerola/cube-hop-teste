@@ -160,7 +160,7 @@ set.shakeInvert;Angry shaking swaps the controls until the child calms down;Aban
 form.testing;Testing;Testes
 set.dev;:dev: Dev mode: a button to try each mechanic right away;:dev: Modo dev: um botão para experimentar cada mecânica
 form.mascot;Mascot (test version);Mascote (versão de teste)
-set.mascot;Pip the mascot: break activities make him happy;Pip, a mascote: as atividades de pausa deixam-no feliz
+set.mascot;Pip the mascot: doing break activities together makes him happy;Pip, a mascote: fazer as atividades de pausa juntos deixa-o feliz
 dev.title;:dev: Dev mode;:dev: Modo dev
 dev.text;"Jump the clock: the real sequence plays
 (it follows the grown-up settings)";"Avançar o relógio: a sequência real acontece
@@ -194,17 +194,32 @@ pip.hum;:hum: Hum a song to Pip;:hum: Cantarola uma música ao Pip
 pip.rest;":phone: Put Pip to bed:
 phone face down";":phone: Põe o Pip a dormir:
 telemóvel virado para baixo"
-pip.full;Yum! Pip is full and happy!;Nham! O Pip está cheio e feliz!
-pip.thanks;Yum! Thank you for feeding Pip!;Nham! Obrigado por dares de comer ao Pip!
-pip.stillHungry;"That's ok! Pip is still a bit hungry.
-Want to try another one?";"Não faz mal! O Pip ainda tem um bocadinho de fome.
+pip.done.photo;What a pretty color! Pip loved seeing it.;Que cor tão bonita! O Pip adorou ver.
+pip.done.walk;What a nice walk! Pip stretched his legs.;Que passeio tão bom! O Pip esticou as patas.
+pip.done.calm;Pip breathed with you and feels calm now.;O Pip respirou contigo e agora está calmo.
+pip.done.hum;Pip loved your song!;O Pip adorou a tua música!
+pip.done.rest;Pip had a nap and woke up full of energy!;O Pip dormiu uma sesta e acordou cheio de energia!
+pip.stillTired;"That's ok! Pip is still a bit tired.
+Want to try something else?";"Não faz mal! O Pip ainda está um bocadinho cansado.
 Queres experimentar outra coisa?"
 pip.waiting;"Pip is still waiting for a break…
-Do an activity to let him rest.";"O Pip ainda está à espera de uma pausa…
-Faz uma atividade para ele descansar."
-pip.hungry;"Pip got hungry from all that jumping!
-Do an activity to feed it.";"O Pip ficou com fome de tanto saltar!
-Faz uma atividade para o alimentar."
+Pick something to do together.";"O Pip ainda está à espera da pausa…
+Escolhe uma coisa para fazerem juntos."
+pip.ask.photo;"Pip wants to see colors!
+Let's show him one?";"O Pip quer ver cores!
+Vamos mostrar-lhe uma cor?"
+pip.ask.walk;"Pip wants to go for a walk!
+Let's take him around?";"O Pip quer ir passear!
+Vamos levá-lo a dar uma volta?"
+pip.ask.calm;"Pip is tired from all that jumping!
+Let's breathe with him?";"O Pip está cansado de tanto saltar!
+Vamos respirar com ele?"
+pip.ask.hum;"Pip wants to hear a song!
+Let's sing to him?";"O Pip quer ouvir uma música!
+Vamos cantar para ele?"
+pip.ask.rest;"Pip is sleepy!
+Let's put him to bed?";"O Pip está com sono!
+Vamos pô-lo a dormir?"
 pip.calmToo;Pip feels calm too :smile:;O Pip também está calmo :smile:
 pip.sleepy;"Pip is getting sleepy.
 Let's finish this level and rest!";"O Pip está a ficar com sono.

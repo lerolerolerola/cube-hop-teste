@@ -1,6 +1,7 @@
 // Mascot version (parallel to the base game): open with ?mascot or :gear: Grown-ups → Mascot.
-// Pip is a guide: it gets hungry while you play, break activities feed it, stopping on time feeds it,
-// playing into overtime makes it hungry. It never gets hungry while the game is closed (no pull-back).
+// Pip is a guide with energy hearts: it gets tired while you play, break activities done together and
+// stopping on time cheer it up, a long time without a break tires it. Nothing changes while the game is closed (no pull-back).
+// (In the code the hearts are still called food / feed.)
 // Wraps session.js functions instead of editing them, so the base game is unchanged when the mascot is off.
 const PET = 'Pip', FULL = 5;
 DEFAULTS.mascot = false;
@@ -73,8 +74,8 @@ ACTS.forEach(a => {
     if (!S.mascot) return f(done, back);
     f(() => {
       done(); feed(2);
-      say(tr(pet.food >= FULL ? 'pip.full' : 'pip.thanks'), 'happy');
-    }, () => showBreak(tr('pip.stillHungry')));
+      say(tr('pip.done.' + k), 'happy'); // what you just did together, not always food
+    }, () => showBreak(tr('pip.stillTired')));
     const h2 = $('modal').querySelector('h2');
     h2.innerHTML = icons(tr('pip.' + k, { color: h2.querySelector('b')?.outerHTML, steps: S.steps }));
   };
@@ -83,7 +84,8 @@ ACTS.forEach(a => {
 wrap('breakTime', () => {
   if (!ACTS.some(([k]) => S[k])) return;
   if (!snoozes) feed(-1); // only when the break is due, not each time it comes back after 'Not now'
-  showBreak(tr(snoozes ? 'pip.waiting' : 'pip.hungry'));
+  // Pip asks for one of the activities that are on; the list still offers all of them.
+  showBreak(snoozes ? tr('pip.waiting') : tr('pip.ask.' + pick(ACTS.filter(([k]) => S[k]))[0]));
 });
 
 wrap('calm', (orig, done, back) => orig(() => { done(); feed(1); say(tr('pip.calmToo'), 'happy'); }, back));
