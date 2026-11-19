@@ -16,7 +16,6 @@ title.newGame;NEW GAME;NOVO JOGO
 title.resetTime;:reset: RESET TIME (TEST);:reset: REPOR TEMPO (TESTE)
 title.pcHelp;:laptop: Arrows walk · Space jump · Shift dash · hold E = angry shake · hold F = phone face down;:laptop: Setas para andar · Espaço para saltar · Shift para fazer Dash · Manter E pressionado = Abanar · Manter F pressionado = telemóvel virado para baixo
 title.grownUps;:gear: Grown-ups;:gear: Adultos
-title.rotate;Turn your phone sideways;Vira o telemóvel de lado
 title.autoLevel;:trophy: Autonomy level {n};:trophy: Nível de autonomia {n}
 title.leftToday;Play time left today: {min} min;Tempo de jogo que resta hoje: {min} min
 title.dayUsed;Today's play time is used up. See you tomorrow! :moon:;O tempo de jogo de hoje acabou. Até amanhã! :moon:
@@ -43,6 +42,12 @@ level6.name;6 · LAVA PEAKS;6 · PICOS DE LAVA
 level6.hint;"Final level!
 Use everything you learned";"Último nível!
 Usa tudo o que aprendeste"
+climb1.name;1 · TOWER;1 · TORRE
+climb1.hint;Climb to the door at the top!;Sobe até à porta lá em cima!
+climb2.name;2 · CANYON;2 · DESFILADEIRO
+climb2.hint;Too high? Jump twice!;Muito alto? Salta duas vezes!
+climb3.name;3 · SKY;3 · CÉU
+climb3.hint;Far away? Jump and dash with B!;Muito longe? Salta e faz dash com o B!
 game.checkpoint;Checkpoint!;Checkpoint!
 auto.gain;+{n} autonomy;+{n} autonomia
 auto.levelUp;:trophy: Autonomy level {n}!;:trophy: Nível de autonomia {n}!

@@ -1,11 +1,18 @@
-const T = 16, H = 176, GRAV = 0.3, JUMP = 5.6, DOUBLE = 5, WALK = 1.6, DASH = 4.5;
+const T = 16, GRAV = 0.3, JUMP = 5.6, DOUBLE = 5, WALK = 1.6, DASH = 4.5;
 const LIGHT = 'rgba(255,255,255,.3)', DARK = 'rgba(0,0,0,.18)', INK = '#1b1f4b';
 
 const $ = id => document.getElementById(id);
 const cv = $('game'), ctx = cv.getContext('2d');
-let W = 320;
+// Phone upright when the page opens: climbing levels (12 tiles wide, the view scrolls up). Sideways: the 6 levels.
+const TALL = matchMedia('(orientation: portrait)').matches && matchMedia('(pointer: coarse)').matches || new URLSearchParams(location.search).has('tall');
+const LV = TALL ? CLIMB_LEVELS : LEVELS, LKEY = TALL ? 'climb' : 'level', SAVE = TALL ? 'saveUp' : 'save';
+document.documentElement.classList.toggle('tall', TALL);
+// Turning the phone on the title screen switches between climbing and sideways levels.
+matchMedia('(orientation: portrait)').onchange = () => { if (!playing && matchMedia('(pointer: coarse)').matches) location.reload(); };
+let W = 320, H = 176;
 function resize() {
-  W = Math.ceil(H * cv.clientWidth / cv.clientHeight) || 320;
+  if (TALL) { W = 192; H = Math.ceil(W * cv.clientHeight / cv.clientWidth) || 320; }
+  else W = Math.ceil(H * cv.clientWidth / cv.clientHeight) || 320;
   cv.width = W; cv.height = H;
 }
 addEventListener('resize', resize); resize();
@@ -53,7 +60,7 @@ function unlock() {
   window.DeviceMotionEvent?.requestPermission?.().catch(() => {});
   window.DeviceOrientationEvent?.requestPermission?.().catch(() => {});
   if (matchMedia('(pointer: coarse)').matches)
-    document.documentElement.requestFullscreen?.().then(() => screen.orientation.lock?.('landscape')).catch(() => {});
+    document.documentElement.requestFullscreen?.().catch(() => {});
   navigator.wakeLock?.request('screen').catch(() => {});
 }
 
@@ -74,12 +81,12 @@ function music() {
 
 onPress($('mute'), () => { muted = !muted; $('mute').innerHTML = ic(muted ? 'mute' : 'sound'); });
 
-let lvl = 0, map, player, enemies, parts = [], total = 0, startTotal = 0, camX = 0, t = 0, dead = 0, spawn;
+let lvl = 0, map, player, enemies, parts = [], total = 0, startTotal = 0, camX = 0, camY = 0, t = 0, dead = 0, spawn;
 let playing = false, paused = false;
 
 function loadLevel(i) {
   lvl = i;
-  const rows = LEVELS[i].map, w = Math.max(...rows.map(r => r.length));
+  const rows = LV[i].map, w = Math.max(...rows.map(r => r.length));
   map = rows.map(r => r.padEnd(w).split(''));
   enemies = []; parts = []; startTotal = total;
   map.forEach((row, y) => row.forEach((c, x) => {
@@ -88,8 +95,8 @@ function loadLevel(i) {
     if (c === 'P' || c === 'E') row[x] = ' ';
   }));
   respawn();
-  $('level').textContent = txt(`level${i + 1}.name`);
-  if (playing) toast(tr(`level${i + 1}.hint`));
+  $('level').textContent = txt(`${LKEY}${i + 1}.name`);
+  if (playing) toast(tr(`${LKEY}${i + 1}.hint`));
 }
 
 function respawn() {
@@ -187,19 +194,21 @@ function update() {
     if (c === '^' && p.y + p.h > y * T + 9) return die();
     if (c === 'D') { sfx(523, 0.1); sfx(784, 0.3); return onLevelDone(); }
   }
-  // Checkpoint: passing the flag's column counts, even jumping over it.
-  for (const x of new Set(cells(p).map(([x]) => x))) {
-    const y = map.findIndex(r => r[x] === 'F');
-    if (y >= 0) { map[y][x] = 'f'; spawn = { x: x * T + 3, y: y * T + 2 }; sfx(660, 0.1); sfx(880, 0.2); toast(tr('game.checkpoint')); }
-  }
-  if (p.y > H + 16) return die();
+  // Checkpoint: passing the flag's column counts, even jumping over it (climbing: getting above its row).
+  map.forEach((r, y) => r.forEach((c, x) => {
+    if (c === 'F' && (TALL ? p.y < (y + 1) * T : p.x < (x + 1) * T && p.x + p.w >= x * T)) {
+      r[x] = 'f'; spawn = { x: x * T + 3, y: y * T + 2 }; sfx(660, 0.1); sfx(880, 0.2); toast(tr('game.checkpoint'));
+    }
+  }));
+  const bottom = map.length * T + 16;
+  if (p.y > bottom) return die();
 
   for (const e of enemies) {
-    e.vx = e.dir * (LEVELS[lvl].enemySpeed || 0.5);
+    e.vx = e.dir * (LV[lvl].enemySpeed || 0.5);
     e.vy = Math.min(e.vy + GRAV, 7); move(e);
     const ahead = tile(Math.floor((e.dir > 0 ? e.x + e.w + 1 : e.x - 1) / T), Math.floor((e.y + e.h + 2) / T));
     if (e.wall || (e.ground && !solid(ahead))) e.dir *= -1;
-    if (e.y > H + 16) e.dead = true;
+    if (e.y > bottom) e.dead = true;
     if (!e.dead && hit(p, e)) {
       if (p.dash || (p.vy > 0 && p.y + p.h - e.y < 8)) {
         e.dead = true; if (!p.dash) p.vy = -4.5; burst(e.x + 6, e.y + 6, '#b28dff', 12); sfx(330, 0.1);
@@ -209,6 +218,7 @@ function update() {
   }
   enemies = enemies.filter(e => !e.dead);
   camX = Math.max(0, Math.min(map[0].length * T - W, p.x - W / 2 + 5));
+  camY = Math.max(0, Math.min(map.length * T - H, p.y - H * 0.6));
 }
 
 const hash = (x, y) => ((x * 73856093) ^ (y * 19349663)) >>> 0;
@@ -272,7 +282,7 @@ function drawEnemy(e) {
 }
 
 function draw() {
-  const L = LEVELS[lvl], cx = Math.round(camX);
+  const L = LV[lvl], cx = Math.round(camX), cy = Math.round(camY), sink = (map.length * T - H - cy) * 0.3;
   const g = ctx.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, L.sky[0]); g.addColorStop(1, L.sky[1]);
   rect(0, 0, W, H, g);
@@ -287,13 +297,14 @@ function draw() {
 
   for (let i = Math.floor(cx * 0.4 / 40) - 1, n = i + W / 40 + 3; i < n; i++) {
     const x = Math.round(i * 40 - cx * 0.4), h = 50 + hash(i, 7) % 70, w = 20 + hash(i, 3) % 16;
-    rect(x, H - h, w, h, L.far); rect(x - 2, H - h, w + 4, 3, LIGHT);
-    for (let wy = H - h + 10; wy < H - 10; wy += 14) rect(x + (w >> 1) - 1, wy, 3, 5, DARK);
+    const y = H - h + sink; // climbing: the city sinks below as you go up
+    rect(x, y, w, h, L.far); rect(x - 2, y, w + 4, 3, LIGHT);
+    for (let wy = y + 10; wy < y + h - 10; wy += 14) rect(x + (w >> 1) - 1, wy, 3, 5, DARK);
   }
 
-  ctx.save(); ctx.translate(-cx, 0);
-  const x0 = Math.floor(cx / T), x1 = x0 + Math.ceil(W / T) + 1;
-  for (let y = 0; y < map.length; y++) for (let x = x0; x <= x1; x++) drawTile(L, map[y][x], x, y);
+  ctx.save(); ctx.translate(-cx, -cy);
+  const x0 = Math.floor(cx / T), x1 = x0 + Math.ceil(W / T) + 1, y0 = Math.floor(cy / T), y1 = Math.min(map.length - 1, y0 + Math.ceil(H / T) + 1);
+  for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) drawTile(L, map[y][x], x, y);
   for (const e of enemies) drawEnemy(e);
   if (!dead && !(player.safe && t % 8 < 4)) drawPlayer(player); // blinks while safe
   for (const q of parts) rect(q.x | 0, q.y | 0, 2, 2, q.c);

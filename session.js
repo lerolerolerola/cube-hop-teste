@@ -194,8 +194,8 @@ function addTime() {
 }
 
 function onLevelDone() {
-  const next = (lvl + 1) % LEVELS.length, last = next === 0;
-  put('save', { lvl: next, total });
+  const next = (lvl + 1) % LV.length, last = next === 0;
+  put(SAVE, { lvl: next, total });
   if (timeUp) return endSession('end.justInTime', true);
   modal(`<h2>${tr(last ? 'level.allDone' : 'level.done')}</h2><p>${tr('level.saved', { total })}</p>`, [
     [tr(last ? 'btn.playAgain' : 'btn.nextLevel'), () => { loadLevel(next); closeModal(); }],
@@ -204,7 +204,7 @@ function onLevelDone() {
 }
 
 function endSession(msg = 'end.great', saved = false) { // msg: key in languages.csv
-  if (!saved) { total = startTotal; put('save', { lvl, total }); }
+  if (!saved) { total = startTotal; put(SAVE, { lvl, total }); }
   put('week', week); saveDay();
   const mins = Math.max(1, Math.round(used / 60));
   // Stopping on time = autonomy; stopping before the time is up = a bit more. Forced end = nothing.
@@ -258,7 +258,7 @@ function showTitle() {
   Object.assign(fx, { inverted: false, betray: false, musicRate: 1, offKey: false });
   cv.style.filter = lastFilter = '';
   $('hud').classList.add('hidden'); $('pad').classList.add('hidden'); $('title').classList.remove('hidden');
-  const wl = Math.max(0, Math.min(S.week * 60 - week.used, dayLeft())), save = get('save', null);
+  const wl = Math.max(0, Math.min(S.week * 60 - week.used, dayLeft())), save = get(SAVE, null);
   $('weekInfo').innerHTML = icons(tr('title.autoLevel', { n: autoLevel()[0] }) + '<br>' + (wl > 0 ? tr('title.leftToday', { min: Math.ceil(wl / 60) })
     : tr(dayLeft() <= 0 ? 'title.dayUsed' : 'title.weekUsed')));
   $('continue').classList.toggle('hidden', !save || wl <= 0);
@@ -377,7 +377,7 @@ function devCard() {
   ]);
 }
 
-onPress($('continue'), () => { unlock(); const s = get('save', { lvl: 0, total: 0 }); startSession(s.lvl, s.total); });
+onPress($('continue'), () => { unlock(); const s = get(SAVE, { lvl: 0, total: 0 }); startSession(s.lvl, s.total); });
 onPress($('newGame'), () => { unlock(); startSession(0, 0); });
 onPress($('parents'), () => grownUp(settingsCard, showTitle));
 onPress($('resetWeek'), () => {
