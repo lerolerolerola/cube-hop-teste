@@ -1,0 +1,9 @@
+{
+  "name": "Cube Hop",
+  "short_name": "Cube Hop",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1b1f4b",
+  "theme_color": "#1b1f4b",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }]
+}

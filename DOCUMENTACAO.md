@@ -52,7 +52,9 @@ Podem juntar-se: `?mascot&dev&lang=pt`.
 
 **6 níveis**, cada um ensina ou junta movimentos: 1 salto · 2 salto duplo (paredes altas) · 3 dash (buracos largos) · 4 tudo junto, com inimigos mais rápidos · 5 grutas com mais espinhos · 6 o mais difícil, com os inimigos mais rápidos. Cada nível mostra uma dica quando começa.
 
-**Telemóvel em pé:** se o jogo for aberto com o telemóvel na vertical, joga-se outro conjunto de **3 níveis a subir** (1 Torre · 2 Desfiladeiro, que pede salto duplo · 3 Céu, que pede dash), em que se sobe até uma porta lá em cima. O nível ocupa o ecrã entre a barra de cima e os comandos, que ficam por baixo. Rodar o telemóvel no ecrã inicial troca de conjunto; a meio do jogo não troca. Cada conjunto tem o seu progresso guardado. No computador, testa-se com `?tall`.
+**Versão vertical e horizontal:** no ecrã inicial escolhe-se **VERTICAL** ou **HORIZONTAL** (a escolha fica guardada; da primeira vez segue a posição do telemóvel). A horizontal tem os 6 níveis acima. A vertical tem **3 níveis a subir** até uma porta lá em cima (1 Torre · 2 Desfiladeiro, que pede salto duplo · 3 Céu, que pede dash); com o telemóvel em pé o nível fica entre a barra de cima e os comandos, deitado fica numa coluna ao centro. Cada versão tem o seu progresso guardado. No computador, `?tall` força a vertical.
+
+**Instalar como aplicação:** no iPhone, Safari → Partilhar → *Adicionar ao ecrã principal*; no Android, Chrome → menu → *Instalar aplicação*. Abre em ecrã inteiro, sem as barras do browser, e depois de aberto uma vez funciona sem internet.
 
 - **Cubos:** apanham-se pelos níveis e ficam guardados. Ao apanhar o primeiro aparece uma explicação; tocar no contador de cubos mostra-a outra vez.
 - **Checkpoint (bandeira):** ativa ao passar pela coluna da bandeira, mesmo a saltar por cima. Ao morrer, volta-se ao último checkpoint.

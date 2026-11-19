@@ -3,12 +3,17 @@ const LIGHT = 'rgba(255,255,255,.3)', DARK = 'rgba(0,0,0,.18)', INK = '#1b1f4b';
 
 const $ = id => document.getElementById(id);
 const cv = $('game'), ctx = cv.getContext('2d');
-// Phone upright when the page opens: climbing levels (12 tiles wide, the view scrolls up). Sideways: the 6 levels.
-const TALL = matchMedia('(orientation: portrait)').matches && matchMedia('(pointer: coarse)').matches || new URLSearchParams(location.search).has('tall');
+// Two versions, picked on the title screen (first time: how the phone is held).
+// Vertical: climbing levels, 12 tiles wide, the view scrolls up. Horizontal: the 6 levels.
+let shape = null; try { shape = localStorage.getItem('cubehop.tall'); } catch {}
+const TALL = new URLSearchParams(location.search).has('tall') ||
+  (shape ? shape === 'true' : matchMedia('(orientation: portrait)').matches && matchMedia('(pointer: coarse)').matches);
 const LV = TALL ? CLIMB_LEVELS : LEVELS, LKEY = TALL ? 'climb' : 'level', SAVE = TALL ? 'saveUp' : 'save';
 document.documentElement.classList.toggle('tall', TALL);
-// Turning the phone on the title screen switches between climbing and sideways levels.
-matchMedia('(orientation: portrait)').onchange = () => { if (!playing && matchMedia('(pointer: coarse)').matches) location.reload(); };
+for (const [id, tall] of [['upright', true], ['sideways', false]]) {
+  $(id).className = tall === TALL ? '' : 'ghost';
+  onPress($(id), () => { try { localStorage.setItem('cubehop.tall', tall); } catch {} if (tall !== TALL) location.reload(); });
+}
 let W = 320, H = 176;
 function resize() {
   if (TALL) { W = 192; H = Math.ceil(W * cv.clientHeight / cv.clientWidth) || 320; }
@@ -16,6 +21,8 @@ function resize() {
   cv.width = W; cv.height = H;
 }
 addEventListener('resize', resize); resize();
+// iPhone ignores user-scalable=no in the viewport tag: stop pinch zoom here.
+document.addEventListener('gesturestart', e => e.preventDefault());
 
 const fx = { inverted: false, betray: false, musicRate: 1, offKey: false };
 

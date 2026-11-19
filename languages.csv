@@ -11,6 +11,8 @@ You keep them, even when you stop playing.";":gem: Cubos! Apanha-os em todos os 
 Ficam guardados, mesmo quando paras de jogar."
 title.withPip;WITH PIP;COM O PIP
 title.noPip;NO MASCOT;SEM MASCOTE
+title.upright;VERTICAL;VERTICAL
+title.sideways;HORIZONTAL;HORIZONTAL
 title.continue;:play: CONTINUE;:play: CONTINUAR
 title.newGame;NEW GAME;NOVO JOGO
 title.resetTime;:reset: RESET TIME (TEST);:reset: REPOR TEMPO (TESTE)

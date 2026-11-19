@@ -4,11 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cube Hop">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
 <meta name="theme-color" content="#1b1f4b">
 <title>Cube Hop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=36">
+<link rel="stylesheet" href="style.css?v=37">
 </head>
 <body>
 <canvas id="game"></canvas>
@@ -35,6 +41,7 @@
   <h1>CUBE<br>HOP</h1>
   <div id="petTitle" class="hidden"></div>
   <div id="pick" class="btns"><button id="withPip"></button><button id="noPip" data-t="title.noPip"></button></div>
+  <div id="shape" class="btns"><button id="upright" data-t="title.upright"></button><button id="sideways" data-t="title.sideways"></button></div>
   <p id="weekInfo"></p>
   <div class="btns">
     <button id="continue" data-t="title.continue"></button>
@@ -47,13 +54,13 @@
 
 <div id="modal" class="screen hidden"></div>
 
-<script src="lang.js?v=36"></script>
-<script src="levels.js?v=36"></script>
-<script src="icons.js?v=36"></script>
+<script src="lang.js?v=37"></script>
+<script src="levels.js?v=37"></script>
+<script src="icons.js?v=37"></script>
 <script>for (const e of document.querySelectorAll('#hud, #pad, #title')) e.innerHTML = icons(e.innerHTML); applyText();</script>
-<script src="game.js?v=36"></script>
-<script src="session.js?v=36"></script>
-<script src="mascot.js?v=36"></script>
+<script src="game.js?v=37"></script>
+<script src="session.js?v=37"></script>
+<script src="mascot.js?v=37"></script>
 <script>
 // A file that didn't load (weak connection) leaves a blue screen with the D-pad icons as text: reload once.
 try {
@@ -61,6 +68,7 @@ try {
     if (!sessionStorage.getItem('retried')) { sessionStorage.setItem('retried', 1); location.reload(); }
   } else sessionStorage.removeItem('retried');
 } catch {}
+navigator.serviceWorker?.register('sw.js').catch(() => {});
 </script>
 </body>
 </html>

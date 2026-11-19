@@ -38,11 +38,15 @@ function readLangs(text) {
 }
 
 // ponytail: synchronous load so every script after this can call tr() right away; fine for a ~15 KB file.
+// The last copy is kept in localStorage so the texts also load offline (sw.js can't serve a synchronous request).
 function fileText() {
-  const x = new XMLHttpRequest();
-  x.open('GET', 'languages.csv' + new URL(document.currentScript.src).search, false);
-  x.send();
-  return x.responseText;
+  try {
+    const x = new XMLHttpRequest();
+    x.open('GET', 'languages.csv' + new URL(document.currentScript.src).search, false);
+    x.send();
+    if (x.status === 200) { try { localStorage.setItem('cubehop.csv', x.responseText); } catch {} return x.responseText; }
+  } catch {}
+  return localStorage.getItem('cubehop.csv') || '';
 }
 
 let L = {};
