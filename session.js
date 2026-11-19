@@ -139,14 +139,18 @@ function modal(html, buttons = []) {
   stopMedia(); activityTick = null; paused = true;
   const m = $('modal');
   m.innerHTML = `<div class="card">${icons(html)}<div class="btns"></div></div>`;
+  addButtons(m.querySelector('.card > .btns:last-child'), buttons);
+  m.classList.remove('hidden');
+  return cardId;
+}
+// buttons: [label, onPress, class]
+function addButtons(box, buttons) {
   for (const [label, fn, cls] of buttons) {
     const b = document.createElement('button');
     b.innerHTML = icons(label); b.className = cls || '';
     onPress(b, () => fn());
-    m.querySelector('.card > .btns:last-child').append(b);
+    box.append(b);
   }
-  m.classList.remove('hidden');
-  return cardId;
 }
 function closeModal() { stopMedia(); activityTick = null; paused = false; $('modal').classList.add('hidden'); }
 function stopMedia() { cardId++; stream?.getTracks().forEach(k => k.stop()); stream = null; analyser = null; }
@@ -167,11 +171,12 @@ function breakTime() {
     modal(`<h2>${tr('break.done')}</h2>${g}`, [[tr('btn.backToGame'), closeModal]]);
   };
   const notNow = () => { snoozes++; nextBreak = used + SNOOZE; closeModal(); };
-  modal(`<h2>${tr('break.title')}</h2><p>${tr('break.pick')}</p>`, [
-    ...acts.map(([, label, fn]) => [tr(label), () => fn(done, breakTime)]),
+  // Activities as a list; skipping or stopping are a separate group under a line.
+  modal(`<h2>${tr('break.title')}</h2><p>${tr('break.pick')}</p><div class="list" id="acts"></div><hr>`, [
     [tr('btn.notNow'), notNow, 'ghost'],
     [tr('btn.doneToday'), () => endSession(), 'ghost'],
   ]);
+  addButtons($('acts'), acts.map(([, label, fn]) => [tr(label), () => fn(done, breakTime)]));
 }
 
 function timesUp() {
@@ -364,16 +369,12 @@ function devCard() {
     [tr('dev.reset'), () => { used = extra = sinceBreak = snoozes = finishBy = invertUntil = 0; warned = timeUp = streakWarned = false; for (const k in devFx) devFx[k] = false; closeModal(); }],
   ]);
   $('modal').querySelector('.btns').insertAdjacentHTML('afterend', `<p>${tr('dev.one')}</p><div class="btns" id="devToggles"></div>`);
-  for (const [label, fn, cls] of [
+  addButtons($('devToggles'), [
     toggle('gray', tr('dev.gray')), toggle('negative', tr('dev.negative')), toggle('music', tr('dev.music')),
     toggle('invert', tr('dev.invert')), toggle('betray', tr('dev.betray')),
     [tr('dev.angry'), angryShake, 'ghost'],
     [tr('dev.lockWeek'), lockWeek, 'ghost'], [tr('btn.close'), closeModal],
-  ]) {
-    const b = document.createElement('button');
-    b.innerHTML = icons(label); b.className = cls || ''; onPress(b, fn);
-    $('devToggles').append(b);
-  }
+  ]);
 }
 
 onPress($('continue'), () => { unlock(); const s = get('save', { lvl: 0, total: 0 }); startSession(s.lvl, s.total); });

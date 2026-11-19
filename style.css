@@ -163,6 +163,10 @@ h1 { font-family: var(--pixel); font-size: 44px; line-height: 1.2; color: var(--
 h2 { font-family: var(--pixel); font-size: 18px; line-height: 1.6; font-weight: 400; color: var(--yellow); }
 h3 { font-family: var(--pixel); font-size: 13px; line-height: 1.6; font-weight: 400; color: var(--mint); align-self: flex-start; margin-top: 10px; }
 .btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+/* break activities: one per line, icon and text on the left */
+.list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; }
+.list button { justify-content: flex-start; padding: 10px 16px; }
+.card hr { align-self: stretch; border: 0; border-top: 3px dashed #ffffff44; margin: 4px 0; }
 
 .card {
   width: 100%;
@@ -219,4 +223,4 @@ p .num, .row .num { font-family: var(--digits); font-size: 1.35em; line-height: 
 #rotate { display: none; z-index: 10; font-size: 48px; background: var(--night); }
 @media (orientation: portrait) and (pointer: coarse) { #rotate { display: flex; } }
 @media (pointer: coarse) { .pc { display: none !important; } }
-@media (max-height: 420px) { .card { padding: 14px 18px; gap: 10px; } h2 { font-size: 15px; } .screen p { font-size: 17px; } button { font-size: 12px; padding: 11px 14px; } }
+@media (max-height: 420px) { .screen { padding: 8px; } .list { gap: 6px; } .list button { padding: 6px 14px; } .card hr { margin: 0; } .card { padding: 12px 18px; gap: 8px; } h2 { font-size: 15px; } .screen p { font-size: 17px; } button { font-size: 12px; padding: 11px 14px; } }
