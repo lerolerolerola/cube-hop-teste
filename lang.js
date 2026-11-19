@@ -54,8 +54,10 @@ const LANG = wanted.find(c => L[c]) || 'en';
 // Plain text (attributes, textContent). Missing text falls back to English, then to the key itself.
 const txt = (key, vars = {}) => (L[LANG]?.[key] || L.en?.[key] || key).replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? m);
 // For innerHTML: the text can't add tags, line breaks become <br>; vars go in as-is (the game builds them).
-const tr = (key, vars = {}) => txt(key).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
-  .replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? m);
+// Digits get <span class="num"> so sentences can show them in a font where 2, 5 and 8 are easy to read.
+const num = n => `<span class="num">${n}</span>`;
+const tr = (key, vars = {}) => txt(key).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>').replace(/\d+/g, num)
+  .replace(/\{(\w+)\}/g, (m, k) => typeof vars[k] === 'number' ? num(vars[k]) : vars[k] ?? m);
 
 function applyText() {
   document.documentElement.lang = LANG;

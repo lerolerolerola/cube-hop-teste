@@ -184,8 +184,11 @@ h3 { font-family: var(--pixel); font-size: 13px; line-height: 1.6; font-weight: 
 .card .x .ic { margin: 0; }
 .row { display: flex; align-items: center; gap: 12px; width: 100%; font-size: 18px; line-height: 1.3; text-align: left; cursor: pointer; }
 .row input[type=checkbox] { flex: none; width: 22px; height: 22px; accent-color: var(--yellow); }
-.row input[type=number], #gate { margin-left: auto; width: 80px; font: inherit; font-size: 18px; padding: 6px; text-align: center; border: 3px solid #fff; }
-#gate { margin: 0; width: 120px; font-size: 20px; user-select: text; -webkit-user-select: text; }
+.row input[type=number], #gate { margin-left: auto; width: 80px; font-family: var(--digits); font-size: 26px; padding: 2px 6px; text-align: center; border: 3px solid #fff; }
+/* digits inside sentences (lang.js wraps them); titles, buttons and pixel-font lines keep their own font */
+p .num, .row .num { font-family: var(--digits); font-size: 1.35em; line-height: 0; }
+.gain .num, .big .num, #hint .num { font: inherit; }
+#gate { margin: 0; width: 120px; font-size: 30px; user-select: text; -webkit-user-select: text; }
 
 /* activity progress bar */
 .bar { display: block; width: 100%; max-width: 380px; height: 26px; border: 4px solid #fff; }
