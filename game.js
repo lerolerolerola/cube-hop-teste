@@ -93,7 +93,8 @@ function loadLevel(i) {
 }
 
 function respawn() {
-  player = { x: spawn.x, y: spawn.y, w: 10, h: 14, vx: 0, vy: 0, face: 1, coyote: 0 };
+  // safe: 2 s where enemies can't hurt you, so one standing on the checkpoint can't kill you over and over
+  player = { x: spawn.x, y: spawn.y, w: 10, h: 14, vx: 0, vy: 0, face: 1, coyote: 0, safe: 120 };
   dead = 0;
 }
 
@@ -152,6 +153,7 @@ function update() {
   }
 
   const p = player;
+  if (p.safe) p.safe--;
   let dir = (keys.ArrowRight || keys.KeyD || pad.r ? 1 : 0) - (keys.ArrowLeft || keys.KeyA || pad.l ? 1 : 0);
   if (fx.inverted) dir = -dir;
   if (dir) p.face = dir;
@@ -202,7 +204,7 @@ function update() {
       if (p.dash || (p.vy > 0 && p.y + p.h - e.y < 8)) {
         e.dead = true; if (!p.dash) p.vy = -4.5; burst(e.x + 6, e.y + 6, '#b28dff', 12); sfx(330, 0.1);
       }
-      else return die();
+      else if (!p.safe) return die();
     }
   }
   enemies = enemies.filter(e => !e.dead);
@@ -293,7 +295,7 @@ function draw() {
   const x0 = Math.floor(cx / T), x1 = x0 + Math.ceil(W / T) + 1;
   for (let y = 0; y < map.length; y++) for (let x = x0; x <= x1; x++) drawTile(L, map[y][x], x, y);
   for (const e of enemies) drawEnemy(e);
-  if (!dead) drawPlayer(player);
+  if (!dead && !(player.safe && t % 8 < 4)) drawPlayer(player); // blinks while safe
   for (const q of parts) rect(q.x | 0, q.y | 0, 2, 2, q.c);
   ctx.restore();
 }

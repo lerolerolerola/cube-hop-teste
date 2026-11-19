@@ -15,7 +15,7 @@ const used = new Set([...code.matchAll(/(?:tr|txt|endSession)\('([\w.]*\w)'|data
 const names = s => [...s.matchAll(/'(\w+)'/g)].map(m => m[1]);
 for (const f of names(code.match(/const FORM = \[([\s\S]*?)\n\];/)[1]).filter(n => !n.startsWith('form'))) used.add((/^(red|orange|yellow|green|blue|purple)$/.test(f) ? 'color.' : 'set.') + f);
 for (const a of ['photo', 'walk', 'calm', 'hum', 'rest']) used.add('pip.' + a).add('pip.act.' + a);
-for (const i of [1, 2, 3, 4]) used.add(`level${i}.name`).add(`level${i}.hint`);
+for (const i of [1, 2, 3, 4, 5, 6]) used.add(`level${i}.name`).add(`level${i}.hint`);
 used.add('set.mascot');
 const missing = [...used].filter(k => !L.en[k] || !L.pt[k]);
 assert.deepStrictEqual(missing, [], 'missing in languages.csv');

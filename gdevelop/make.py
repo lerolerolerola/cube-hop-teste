@@ -1,4 +1,4 @@
-# Builds a GDevelop project (game.json + assets/) with the 4 levels from ../levels.js plus EXTRA below.
+# Builds a GDevelop project (game.json + assets/) with the levels from ../levels.js.
 # Level design only: no session timer, breaks or end-of-play effects.
 # 48 px tiles, GDevelop defaults where they fit; only 2 variables (Coins, AirJumps).
 # Run: python3 gdevelop/make.py   (needs node to read levels.js)
@@ -9,38 +9,6 @@ T = 16
 LEVELS = json.loads(subprocess.check_output(
     ['node', '-e', "eval(require('fs').readFileSync('levels.js','utf8')+';console.log(JSON.stringify(LEVELS))')"],
     cwd=os.path.dirname(HERE)))
-# Extra levels made for GDevelop only (the web game keeps its 4). Same map letters as levels.js.
-EXTRA = [
-    {'name': '5 · CRYSTAL CAVES', 'sky': ['#2d1b4e', '#5b3a7a'], 'ground': '#3d4a6b', 'grass': '#b28dff', 'brick': '#6c5a8e', 'enemySpeed': 1.0,
-     'map': [
-        '',
-        '',
-        '',
-        '                                      oo                 o o o                        oo',
-        '                                      ##                    E                         ##',
-        '                 E                    ##                BBBBBBBB                      ##                   E',
-        '              BBBBBBBoooo             ##       oooo                    oooo           ##       oooo     BBBBBBB   oooo',
-        '                                      ##                                              ##',
-        '    P     ^^^  E            E ^^^  E  ##  ^^         F  E     E ^^^           E ^^^   ##  E          F    ^^^               ^^^     E    D',
-        '###################       ###################       #################       #################       #############      #####################',
-        '###################       ###################       #################       #################       #############      #####################',
-    ]},
-    {'name': '6 · LAVA PEAKS', 'sky': ['#ff6b4a', '#ffd166'], 'ground': '#5a3a3a', 'grass': '#ff9f43', 'brick': '#8b3a3a', 'enemySpeed': 1.15,
-     'map': [
-        '',
-        '',
-        '',
-        '                                  oo                 o o o                  oo                                            oo',
-        '                                  ##                   E                    ##                                            ##',
-        '            E                     ##                BBBBBBB                 ##                       E                    ##',
-        '          BBBBB   oooo            ##      oooo                  oooo        ##          ooooo     BBBBBBB   oooo          ##      oooo',
-        '                                  ##                                        ##                                            ##',
-        '   P   ^^^    E           E ^^^ E ##  ^^          E ^^^  E ^^ F         ^^^ ##  E ^^^           E ^^^ E ^^        F   ^^^ ##E ^^          E ^^^  E D',
-        '#################       #################       ###############       #################        ############       ###############       ##############',
-        '#################       #################       ###############       #################        ############       ###############       ##############',
-    ]},
-]
-LEVELS += EXTRA
 os.makedirs(os.path.join(HERE, 'assets'), exist_ok=True)
 
 # --- tiny RGBA image drawing, same rects as game.js, saved 3x bigger (48 px tiles) ---
@@ -266,7 +234,7 @@ for n, L in enumerate(LEVELS):
     r, g, b, _ = rgba(L['sky'][0])
     layouts.append({
         'b': b, 'disableInputWhenNotFocused': True, 'mangledName': names[n], 'name': names[n], 'r': r, 'v': g,
-        'standardSortMethod': True, 'stopSoundsOnStartup': True, 'title': L['name'],
+        'standardSortMethod': True, 'stopSoundsOnStartup': True, 'title': names[n],  # level names live in ../languages.csv
         'uiSettings': {'grid': True, 'gridType': 'rectangular', 'gridWidth': W, 'gridHeight': W, 'gridDepth': W,
                        'gridOffsetX': 0, 'gridOffsetY': 0, 'gridOffsetZ': 0, 'gridColor': 10401023, 'gridAlpha': 0.8,
                        'snap': True, 'zoomFactor': 0.7, 'windowMask': False, 'selectedLayer': '',

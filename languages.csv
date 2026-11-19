@@ -32,7 +32,15 @@ level3.hint;"Press B to DASH
 Jump, then dash over big gaps!";"Carrega em B para o DASH
 Salta e faz dash sobre buracos grandes!"
 level4.name;4 · SKY FORTRESS;4 · FORTALEZA DO CÉU
-level4.hint;"Final level!
+level4.hint;"Enemies are faster now!
+Use everything you learned";"Agora os inimigos são mais rápidos!
+Usa tudo o que aprendeste"
+level5.name;5 · CRYSTAL CAVES;5 · GRUTAS DE CRISTAL
+level5.hint;"Crystal caves!
+Watch out for the spikes";"Grutas de cristal!
+Cuidado com os espinhos"
+level6.name;6 · LAVA PEAKS;6 · PICOS DE LAVA
+level6.hint;"Final level!
 Use everything you learned";"Último nível!
 Usa tudo o que aprendeste"
 game.checkpoint;Checkpoint!;Checkpoint!

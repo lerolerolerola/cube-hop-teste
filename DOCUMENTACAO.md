@@ -34,7 +34,7 @@ Juntar `&dev` (ex.: `?mascot&dev`) ativa o modo de teste (ver secção 7).
 | Abanar com força | Manter **E** | Simula um "abanão de raiva" |
 | Pousar virado para baixo | Manter **F** | Simula o telemóvel virado para baixo |
 
-**4 níveis**, cada um ensina um movimento: 1 salto · 2 salto duplo (paredes altas) · 3 dash (buracos largos) · 4 tudo junto, com inimigos mais rápidos.
+**6 níveis**, cada um ensina um movimento: 1 salto · 2 salto duplo (paredes altas) · 3 dash (buracos largos) · 4 tudo junto, com inimigos mais rápidos · 5 grutas com mais espinhos · 6 o mais difícil, com os inimigos mais rápidos.
 
 O progresso fica guardado no início de cada nível.
 
@@ -239,7 +239,7 @@ e ir a `http://localhost:8000/?dev`. Para testar sensores no telemóvel é preci
 | `style.css` | Aspeto de tudo o que não é o canvas (cartões, botões, barra de autonomia) |
 | `languages.csv` | Todo o texto do jogo, uma coluna por língua (ver secção 9) |
 | `lang.js` | Lê o CSV; `tr('chave')` devolve o texto na língua do jogo |
-| `levels.js` | Os 4 níveis em texto (`#` chão, `B` tijolo, `o` cubo, `^` espinhos, `E` inimigo, `F` checkpoint, `D` porta, `P` início) |
+| `levels.js` | Os 6 níveis em texto (`#` chão, `B` tijolo, `o` cubo, `^` espinhos, `E` inimigo, `F` checkpoint, `D` porta, `P` início) |
 | `game.js` | Motor do jogo: física, desenho, som, comandos |
 | `session.js` | Tudo o que é sessão: tempo, pausas, atividades, fricção, painel dos adultos, modo dev |
 | `mascot.js` | Versão com mascote. Envolve funções do `session.js` sem as alterar; com a mascote desligada o jogo é igual à versão base |
