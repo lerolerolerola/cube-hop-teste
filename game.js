@@ -21,8 +21,8 @@ function resize() {
   cv.width = W; cv.height = H;
 }
 addEventListener('resize', resize); resize();
-// Upright the top bar can take 2 or 3 rows (Pip, test button): the level starts right below it.
-new ResizeObserver(() => { const b = $('hud').getBoundingClientRect().bottom; if (b) { document.documentElement.style.setProperty('--top', b + 6 + 'px'); resize(); } }).observe($('hud'));
+// The level starts right below the top bar, whatever its height (1 or 2 rows, Pip, test button).
+new ResizeObserver(() => { const b = $('hud').getBoundingClientRect().bottom; if (b) { document.documentElement.style.setProperty('--top', b + 'px'); resize(); } }).observe($('hud'));
 // iPhone ignores user-scalable=no in the viewport tag: stop pinch zoom here.
 document.addEventListener('gesturestart', e => e.preventDefault());
 

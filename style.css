@@ -25,11 +25,13 @@ html, body {
   -webkit-touch-callout: none;
 }
 
+/* the level starts below the top bar (game.js sets --top to the bar's height) */
 canvas {
   position: fixed;
   inset: 0;
+  top: var(--top, 0px);
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--top, 0px));
   image-rendering: pixelated;
   transition: filter 1s;
 }
@@ -59,7 +61,8 @@ button.ghost:active { box-shadow: inset 0 0 0 3px #fff, 0 2px 0 #ffffff55; }
 button .ic { width: 1.8em; height: 1.8em; margin: -0.3em 0; }
 .icon .ic { margin: 0; width: 26px; height: 26px; }
 #dpad .ic { margin: 0; width: 32px; height: 32px; }
-.food .ic { width: 14px; height: 14px; margin-right: 1px; }
+.food .ic { margin-right: 1px; }
+#hud .food .ic { width: 20px; height: 20px; }
 
 /* --- HUD --- */
 #hud {
@@ -68,7 +71,9 @@ button .ic { width: 1.8em; height: 1.8em; margin: -0.3em 0; }
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left));
+  padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  background: var(--night); /* an app bar: its own background, never mixed with the level */
+  box-shadow: 0 3px 0 #0006;
   font-family: var(--digits);
   font-size: 26px;
   text-shadow: 2px 2px 0 #0008;
@@ -82,7 +87,7 @@ button .ic { width: 1.8em; height: 1.8em; margin: -0.3em 0; }
 #level { white-space: nowrap; }
 /* time bar takes all the free space */
 #time { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 120px; font-size: 28px; }
-#hud .ic { width: 22px; height: 22px; }
+#hud .ic { width: 26px; height: 26px; }
 #timeBar { position: relative; display: block; flex: 1; height: 24px; border: 4px solid #fff; background: #1b1f4bcc; box-shadow: 3px 3px 0 #0006; }
 #timeFill { display: block; height: 100%; width: 0; background: var(--yellow); box-shadow: inset 0 -4px 0 var(--yellow-d); }
 #autoLv { color: var(--mint); white-space: nowrap; }
@@ -229,7 +234,8 @@ p .num, .row .num { font-family: var(--digits); font-size: 1.35em; line-height: 
   :root { --top: calc(max(8px, env(safe-area-inset-top)) + 84px); }
   #hud { flex-wrap: wrap; row-gap: 6px; gap: 8px; }
   #time { order: 1; flex-basis: 100%; }
-  #pet { margin-left: auto; }
+  #cubes { margin-right: auto; } /* buttons on the right, Pip next to them */
+  #hud .food .ic { width: 16px; height: 16px; }
   canvas { top: var(--top); bottom: auto; height: min(69vw, 50vh); } /* 69vw ≈ 16 tiles across */
   #pad { top: calc(var(--top) + min(69vw, 50vh)); align-items: center; padding-inline: 16px; }
   #dpad { grid-template: repeat(3, 56px) / repeat(3, 56px); }
