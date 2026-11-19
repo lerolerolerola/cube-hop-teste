@@ -113,10 +113,11 @@ function onTick() {
   const over = noBreak();
   if (over >= 0 && !streakWarned) { streakWarned = true; toast(tr('toast.streak')); }
   const fade = S.fade && S.warn > 0 ? Math.min(1, Math.max(0, 1 - l / (S.warn * 60))) : 0;
-  const gray = devFx.gray || over >= 0 ? 1 : fade;
-  const filter = `grayscale(${gray.toFixed(2)})` + (devFx.negative || (S.negative && over >= STEP) ? ' invert(1)' : '');
+  // Two different signals: time running out = gray + slower music; too long without a break = sepia tint.
+  const gray = devFx.gray ? 1 : fade;
+  const filter = `grayscale(${gray.toFixed(2)})` + (over >= 0 ? ' sepia(1)' : '') + (devFx.negative || (S.negative && over >= STEP) ? ' invert(1)' : '');
   if (filter !== lastFilter) cv.style.filter = lastFilter = filter;
-  fx.musicRate = devFx.music ? 0.65 : over >= 0 ? 0.75 : S.sound ? 1 - 0.35 * fade : 1;
+  fx.musicRate = devFx.music ? 0.65 : S.sound ? 1 - 0.35 * fade : 1;
   fx.offKey = devFx.music || (S.sound && over >= STEP);
   fx.inverted = devFx.invert || (S.invert && over >= 2 * STEP) || t < invertUntil;
   fx.betray = devFx.betray || (S.betray && over >= 3 * STEP);
@@ -129,7 +130,7 @@ function onTick() {
   $('calmBtn').classList.toggle('hidden', t >= invertUntil);
 
   $('cubes').innerHTML = ic('gem') + ' ' + total;
-  const s = Math.max(0, Math.ceil(l));
+  const s = Math.max(0, Math.ceil(finishBy ? finishBy - used : l)); // after time's up: the minutes to finish the level
   $('clock').textContent = `${s / 60 | 0}:${String(s % 60).padStart(2, '0')}`;
 }
 
@@ -169,7 +170,7 @@ function breakTime() {
   modal(`<h2>${tr('break.title')}</h2><p>${tr('break.pick')}</p>`, [
     ...acts.map(([, label, fn]) => [tr(label), () => fn(done, breakTime)]),
     [tr('btn.notNow'), notNow, 'ghost'],
-    [tr('btn.doneToday'), () => endSession()],
+    [tr('btn.doneToday'), () => endSession(), 'ghost'],
   ]);
 }
 
@@ -217,15 +218,19 @@ function grownUp(then, back, note = '') {
   $('gate').focus();
 }
 
+// Settings that only matter when another one is on: [setting]: the one it depends on.
+const SHOW_IF = { steps: 'walk', restSecs: 'rest', ...Object.fromEntries(Object.keys(COLORS).map(c => [c, 'photo'])) };
+
 function settingsCard() {
-  let html = `<h2>${tr('settings.title')}</h2><p>${tr('settings.info', { used: Math.round(week.used / 60), total: S.week, lv: autoLevel()[0], pts: auto.pts })}</p>`;
+  const dep = k => SHOW_IF[k] ? ` data-if="${SHOW_IF[k]}"` : '';
+  let html = `<button class="ghost x" id="closeX" aria-label="${txt('btn.cancel')}">:close:</button><h2>${tr('settings.title')}</h2><p>${tr('settings.info', { used: Math.round(week.used / 60), total: S.week, lv: autoLevel()[0], pts: auto.pts })}</p>`;
   for (const [head, fields] of FORM) {
-    html += `<h3>${tr(head)}</h3>`;
+    html += `<h3${fields.every(k => SHOW_IF[k] === SHOW_IF[fields[0]]) ? dep(fields[0]) : ''}>${tr(head)}</h3>`;
     for (const k of fields) {
       const label = tr(COLORS[k] ? 'color.' + k : 'set.' + k);
       html += typeof DEFAULTS[k] === 'number'
-        ? `<label class="row">${icons(label)}<input type="number" min="0" step="any" id="s_${k}" value="${S[k]}"></label>`
-        : `<label class="row"><input type="checkbox" id="s_${k}" ${S[k] ? 'checked' : ''}>${icons(label)}</label>`;
+        ? `<label class="row"${dep(k)}>${icons(label)}<input type="number" min="0" step="any" id="s_${k}" value="${S[k]}"></label>`
+        : `<label class="row"${dep(k)}><input type="checkbox" id="s_${k}" ${S[k] ? 'checked' : ''}>${icons(label)}</label>`;
     }
   }
   modal(html, [
@@ -237,6 +242,10 @@ function settingsCard() {
     [tr('btn.resetWeekTime'), () => { week.used = 0; put('week', week); day = {}; put('day', day); settingsCard(); }, 'ghost'],
     [tr('btn.cancel'), showTitle, 'ghost'],
   ]);
+  onPress($('closeX'), showTitle);
+  const sync = () => $('modal').querySelectorAll('[data-if]').forEach(e => e.classList.toggle('hidden', !$('s_' + e.dataset.if).checked));
+  for (const k of new Set(Object.values(SHOW_IF))) $('s_' + k).addEventListener('change', sync);
+  sync();
 }
 
 function showTitle() {
@@ -376,5 +385,6 @@ onPress($('resetWeek'), () => {
 });
 onPress($('pause'), () => modal(`<h2>${tr('pause.title')}</h2>`, [[tr('btn.resume'), closeModal], [tr('btn.stopPlaying'), () => endSession()]]));
 onPress($('devBtn'), devCard);
+onPress($('cubes'), () => toast(tr('hud.cubesHelp')));
 onPress($('calmBtn'), () => calm(() => { invertUntil = 0; modal(`<h2>${tr('calm.fixed')}</h2>${gain(1)}`, [[tr('btn.backToGame'), closeModal]]); }, closeModal));
 showTitle();

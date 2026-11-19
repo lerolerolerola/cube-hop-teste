@@ -108,7 +108,7 @@ O jogo conta o tempo de jogo desde a **última pausa feita**. Adiar pausas ("Ago
 
 | Tempo seguido sem pausa | Efeito |
 |---|---|
-| 10 min | Aviso "Jogaste muito tempo sem pausa! Faz uma pausa para o jogo voltar ao normal"; cores cinzentas e música mais lenta |
+| 10 min | Aviso "Jogaste muito tempo sem pausa! Faz uma pausa para o jogo voltar ao normal"; imagem com tom sépia (diferente do cinzento do fim do tempo, para não se confundirem) |
 | 12 min | Cores em negativo e música desafinada |
 | 14 min | Esquerda e direita trocadas |
 | 16 min | O jogo ignora alguns saltos |

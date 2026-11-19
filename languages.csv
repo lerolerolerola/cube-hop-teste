@@ -5,6 +5,10 @@ hud.autonomy;Autonomy;Autonomia
 hud.dev;Dev mode;Modo dev
 hud.calm;Calm down;Acalmar
 hud.sound;Sound;Som
+hud.cubes;Cubes;Cubos
+hud.cubesHelp;":gem: Cubes! Collect them in every level.
+You keep them, even when you stop playing.";":gem: Cubos! Apanha-os em todos os níveis.
+Ficam guardados, mesmo quando paras de jogar."
 title.withPip;WITH PIP;COM O PIP
 title.noPip;NO MASCOT;SEM MASCOTE
 title.continue;:play: CONTINUE;:play: CONTINUAR
@@ -47,7 +51,7 @@ btn.back;:back: Back;:back: Voltar
 btn.skip;Skip (PC test);Saltar (teste PC)
 btn.backToGame;:play: Back to the game;:play: Voltar ao jogo
 btn.notNow;:skip: Not now;:skip: Agora não
-btn.doneToday;:flag: I'm done for today;:flag: Por hoje chega
+btn.doneToday;:flag: Stop playing for today;:flag: Parar de jogar por hoje
 btn.finishLevel;:play: Finish this level;:play: Acabar este nível
 btn.stopNow;:flag: Stop now;:flag: Parar agora
 btn.plus5;+5 min (grown-up);+5 min (adulto)
@@ -62,7 +66,7 @@ btn.resetAuto;Reset autonomy level;Repor o nível de autonomia
 btn.resetWeekTime;Reset this week's time;Repor o tempo desta semana
 btn.resume;:play: Resume;:play: Continuar
 btn.stopPlaying;:flag: Stop playing;:flag: Parar de jogar
-btn.snap;:camera: SNAP;:camera: TIRAR FOTO
+btn.snap;:camera: TAKE PHOTO;:camera: TIRAR FOTO
 btn.close;:close: Close;:close: Fechar
 act.photo;:camera: Find a color;:camera: Encontrar uma cor
 act.walk;:walk: Take a walk;:walk: Dar uma volta
@@ -89,7 +93,7 @@ hum.title;:hum: Hum your favorite song;:hum: Cantarola a tua música preferida
 hum.text;Keep humming until the bar is full;Continua a cantarolar até a barra encher
 hum.noMic;Microphone not available, try another activity;Microfone indisponível, experimenta outra atividade
 photo.title;:camera: Find something {color};:camera: Encontra algo {color}
-photo.text;Fill the square with it and press SNAP;Enche o quadrado com essa cor e carrega em FOTO
+photo.text;Fill the square with it and press TAKE PHOTO;Enche o quadrado com essa cor e carrega em TIRAR FOTO
 photo.noCam;Camera not available, try another activity;Câmara indisponível, experimenta outra atividade
 photo.miss;Hmm, I don't see {color} yet. Get closer and try again!;Hmm, ainda não vejo a cor {color}. Aproxima-te e tenta outra vez!
 color.red;Red;Vermelho
@@ -137,7 +141,7 @@ set.restSecs;Seconds face down;Segundos virado para baixo
 form.colors;Colors to find;Cores a encontrar
 form.fade;Winding down;Abrandar
 set.fade;Colors slowly fade to gray;As cores vão ficando cinzentas
-set.sound;Music slows down, then sounds wrong in overtime;A música abranda e depois desafina no tempo extra
+set.sound;Music slows down near the end, and goes off-key after a long time without a break;A música abranda perto do fim e desafina se jogar muito tempo sem pausa
 form.streak;Playing a long time without a break;Jogar muito tempo sem pausa
 set.streak;Friction starts after (min without doing a break, 0 = never);A fricção começa após (min sem fazer pausa, 0 = nunca)
 set.negative;Colors turn negative (+2 min);As cores ficam em negativo (+2 min)

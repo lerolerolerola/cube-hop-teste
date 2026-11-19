@@ -47,7 +47,7 @@ Dev mode doesn't use up the weekly play time.
 
 **Frustration:** shaking the phone angrily swaps left and right. A breathe button appears, and calming down (holding the phone still) fixes the controls.
 
-**Playing a long time without a break:** breaks can be put off ("Not now", back in 1 min). After N minutes without doing a break (default 10): gray + slow music → negative colors and off-key (+2 min) → controls swap (+4 min) → ignored jumps (+6 min). Doing any break clears it all.
+**Playing a long time without a break:** breaks can be put off ("Not now", back in 1 min). After N minutes without doing a break (default 10): sepia tint (different from the gray of time running out) → negative colors and off-key (+2 min) → controls swap (+4 min) → ignored jumps (+6 min). Doing any break clears it all.
 
 **When time is up** (session or week): no overtime. The child gets 2 minutes to finish the level, or stops; then the ending card.
 

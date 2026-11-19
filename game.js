@@ -178,10 +178,17 @@ function update() {
 
   for (const [x, y] of cells(p)) {
     const c = tile(x, y);
-    if (c === 'o') { map[y][x] = ' '; total++; burst(x * T + 8, y * T + 8, '#ffd84a', 10); sfx(988, 0.08); sfx(1319, 0.15); }
-    if (c === 'F') { map[y][x] = 'f'; spawn = { x: x * T + 3, y: y * T + 2 }; sfx(660, 0.1); sfx(880, 0.2); toast(tr('game.checkpoint')); }
+    if (c === 'o') {
+      map[y][x] = ' '; total++; burst(x * T + 8, y * T + 8, '#ffd84a', 10); sfx(988, 0.08); sfx(1319, 0.15);
+      if (!get('cubeHelp', false)) { put('cubeHelp', true); toast(tr('hud.cubesHelp')); } // first cube ever: what cubes are
+    }
     if (c === '^' && p.y + p.h > y * T + 9) return die();
     if (c === 'D') { sfx(523, 0.1); sfx(784, 0.3); return onLevelDone(); }
+  }
+  // Checkpoint: passing the flag's column counts, even jumping over it.
+  for (const x of new Set(cells(p).map(([x]) => x))) {
+    const y = map.findIndex(r => r[x] === 'F');
+    if (y >= 0) { map[y][x] = 'f'; spawn = { x: x * T + 3, y: y * T + 2 }; sfx(660, 0.1); sfx(880, 0.2); toast(tr('game.checkpoint')); }
   }
   if (p.y > H + 16) return die();
 
