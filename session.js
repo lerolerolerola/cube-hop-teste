@@ -266,6 +266,17 @@ function showTitle() {
   $('resetWeek').classList.toggle('hidden', wl > 0);
 }
 
+// First time the game is opened: a short guide for the grown-up setting it up (index.html calls it; ?tutorial shows it again).
+const GUIDE = ['smile', 'clock', 'coffee', 'hourglass', 'lock', 'gear']; // one icon per step: tut1… in languages.csv
+function tutorial(i = 0) {
+  put('tutorial', true);
+  const n = GUIDE.length, last = i === n - 1;
+  modal(`<p class="step">${tr('tut.step', { n: i + 1, total: n })}</p><h2>:${GUIDE[i]}: ${tr(`tut${i + 1}.title`)}</h2>` +
+    `<p>${tr(`tut${i + 1}.text`, { session: S.session, breakEvery: S.breakEvery, week: S.week })}</p>`,
+    last ? [[tr('btn.setupNow'), () => grownUp(settingsCard, showTitle)], [tr('btn.later'), showTitle, 'ghost']]
+      : [[tr('btn.next'), () => tutorial(i + 1)], ...(i ? [[tr('btn.back'), () => tutorial(i - 1), 'ghost']] : []), [tr('btn.skipGuide'), showTitle, 'ghost']]);
+}
+
 function calm(done, back) {
   card(`<h2>${tr('calm.title')}</h2><div class="breathe"></div><p id="breath"></p><i class="bar"><b id="prog"></b></i>`, done, back);
   let still = 0;

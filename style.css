@@ -175,6 +175,7 @@ h3 { font-family: var(--pixel); font-size: 13px; line-height: 1.6; font-weight: 
 /* break activities: one per line, icon and text on the left */
 .list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; }
 .list button { justify-content: flex-start; padding: 10px 16px; }
+.card .step { font-family: var(--pixel); font-size: 11px !important; color: var(--mint); } /* tutorial: Step 2 of 6 */
 .card hr { align-self: stretch; border: 0; border-top: 3px dashed #ffffff44; margin: 4px 0; }
 
 .card {
@@ -200,7 +201,7 @@ h3 { font-family: var(--pixel); font-size: 13px; line-height: 1.6; font-weight: 
 .row input[type=number], #gate { margin-left: auto; width: 80px; font-family: var(--digits); font-size: 26px; padding: 2px 6px; text-align: center; border: 3px solid #fff; }
 /* digits inside sentences (lang.js wraps them); titles, buttons and pixel-font lines keep their own font */
 p .num, .row .num { font-family: var(--digits); font-size: 1.35em; line-height: 0; }
-.gain .num, .big .num, #hint .num { font: inherit; }
+.gain .num, .big .num, #hint .num, .step .num { font: inherit; }
 #gate { margin: 0; width: 120px; font-size: 30px; user-select: text; -webkit-user-select: text; }
 
 /* activity progress bar */
