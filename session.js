@@ -232,9 +232,9 @@ function endSession(msg = 'end.great', saved = false) { // msg: key in languages
 }
 
 function grownUp(then, back, note = '') {
-  const a = 6 + pick([0, 1, 2, 3, 4, 5, 6]), b = 3 + pick([0, 1, 2, 3, 4, 5, 6]);
-  modal(`<h2>${tr('gate.title')}</h2>${note}<p>${tr('gate.question', { a, b })}</p><input id="gate" type="number" inputmode="numeric">`, [
-    [tr('btn.ok'), () => (+$('gate').value === a * b ? then() : grownUp(then, back, `<p>${tr('gate.wrong')}</p>`))],
+  // ponytail: password in plain sight in the source; it only keeps children out, not adults
+  modal(`<h2>${tr('gate.title')}</h2>${note}<p>${tr('gate.question')}</p><input id="gate" type="password" autocapitalize="characters" autocomplete="off">`, [
+    [tr('btn.ok'), () => ($('gate').value.trim().toUpperCase() === 'PDI2026' ? then() : grownUp(then, back, `<p>${tr('gate.wrong')}</p>`))],
     [tr('btn.cancel'), back, 'ghost'],
   ]);
   $('gate').focus();

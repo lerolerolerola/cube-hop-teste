@@ -115,7 +115,7 @@ Princípios que extraímos do artigo *Designing for Disengagement* (Alsheail, Al
 | **Transição gradual** | Aviso antes do fim; as cores desvanecem para cinzento e a música abranda |
 | **Conclusão satisfatória** | Aviso antes do fim, cartão final que valoriza o que fez, progresso guardado para a próxima vez |
 | **Continuidade** | O progresso fica guardado (retoma no início do nível), e o tempo de jogo do dia também |
-| **Contexto social** | Painel de adultos (atrás de uma conta de multiplicar); o cartão final diz "Conta a um adulto o que fizeste hoje" |
+| **Contexto social** | Painel de adultos (protegido por palavra-passe); o cartão final diz "Conta a um adulto o que fizeste hoje" |
 | **Evitar manipulação** | Sem prémios por ficar, sem streaks, sem temporizadores que puxam a criança de volta; não há tempo extra |
 
 ---
@@ -245,7 +245,7 @@ O modo de teste não gasta o tempo semanal.
 
 ## 9. Painel dos adultos
 
-Botão **Adultos** no ecrã inicial, protegido por uma conta de multiplicar. Tudo é guardado só no próprio telemóvel. O **X** no canto, sempre visível, fecha sem guardar.
+Botão **Adultos** no ecrã inicial, protegido pela palavra-passe **PDI2026** (também pedida para +5 min e para recomeçar). Tudo é guardado só no próprio telemóvel. O **X** no canto, sempre visível, fecha sem guardar.
 
 | Grupo | Definições (valores por defeito) |
 |---|---|

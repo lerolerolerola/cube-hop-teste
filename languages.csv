@@ -140,7 +140,7 @@ O teu progresso está guardado, até à próxima!"
 end.tell;:chat: Tell a grown-up what you did today;:chat: Conta a um adulto o que fizeste hoje
 pause.title;:pause: Paused;:pause: Em pausa
 gate.title;For grown-ups;Para adultos
-gate.question;What is {a} × {b}?;Quanto é {a} × {b}?
+gate.question;Password:;Palavra-passe:
 gate.wrong;Not quite, try again!;Não é bem isso, tenta outra vez!
 settings.title;:gear: Grown-up settings;:gear: Definições para adultos
 settings.info;"Played this week: {used} of {total} min
