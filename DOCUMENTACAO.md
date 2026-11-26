@@ -245,8 +245,6 @@ O modo de teste não gasta o tempo semanal.
 
 ## 9. Painel dos adultos
 
-**Guia para adultos:** na primeira vez que o jogo é aberto aparece um guia de 6 passos (tempo de jogo, pausas, fim do tempo, privacidade e este painel), que termina com *Configurar agora* ou *Mais tarde*. Com `?tutorial` no endereço, o guia aparece outra vez.
-
 Botão **Adultos** no ecrã inicial, protegido por uma conta de multiplicar. Tudo é guardado só no próprio telemóvel. O **X** no canto, sempre visível, fecha sem guardar.
 
 | Grupo | Definições (valores por defeito) |

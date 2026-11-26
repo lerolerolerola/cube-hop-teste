@@ -17,7 +17,6 @@ for (const f of names(code.match(/const FORM = \[([\s\S]*?)\n\];/)[1]).filter(n 
 for (const a of ['photo', 'walk', 'calm', 'hum', 'rest']) used.add('pip.' + a).add('pip.act.' + a).add('pip.done.' + a).add('pip.ask.' + a);
 for (const i of [1, 2, 3, 4, 5, 6]) used.add(`level${i}.name`).add(`level${i}.hint`);
 for (const i of [1, 2, 3]) used.add(`climb${i}.name`).add(`climb${i}.hint`);
-for (const i of [1, 2, 3, 4, 5, 6]) used.add(`tut${i}.title`).add(`tut${i}.text`);
 used.add('set.mascot');
 const missing = [...used].filter(k => !L.en[k] || !L.pt[k]);
 assert.deepStrictEqual(missing, [], 'missing in languages.csv');

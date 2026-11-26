@@ -133,23 +133,6 @@ Your progress is saved, see you next time!";"Jogaste {min} min hoje e tens :gem:
 O teu progresso está guardado, até à próxima!"
 end.tell;:chat: Tell a grown-up what you did today;:chat: Conta a um adulto o que fizeste hoje
 pause.title;:pause: Paused;:pause: Em pausa
-tut.step;Step {n} of {total};Passo {n} de {total}
-tut1.title;Hi! A quick guide for grown-ups;Olá! Um guia rápido para adultos
-tut1.text;Cube Hop is a platform game that helps children stop playing on their own, without punishments. Six short steps show how it works.;O Cube Hop é um jogo de plataformas que ajuda a criança a parar de jogar por si, sem castigos. Em 6 passos curtos mostramos como funciona.
-tut2.title;Play time;O tempo de jogo
-tut2.text;Each session lasts {session} min, with a break every {breakEvery} min, and at most {week} min a week. The clock at the top shows your child how much time is left.;Cada sessão dura {session} min, com uma pausa a cada {breakEvery} min, e no máximo {week} min por semana. O relógio no topo mostra à criança quanto tempo falta.
-tut3.title;Off-screen breaks;Pausas fora do ecrã
-tut3.text;At each break the game suggests an activity: find a color, take a walk, breathe, hum a tune or put the phone down. Your child picks one, and can also put the break off or stop playing.;Nas pausas, o jogo propõe uma atividade: encontrar uma cor, dar uma volta, respirar, cantarolar ou pousar o telemóvel. A criança escolhe, e também pode adiar a pausa ou parar de jogar.
-tut4.title;When time is up;Quando o tempo acaba
-tut4.text;Near the end, the colors fade to gray and the music slows down. Then your child can finish the level (2 minutes) or stop right away. Stopping on their own earns autonomy points.;Perto do fim, as cores ficam cinzentas e a música abranda. Depois, a criança pode acabar o nível (tem 2 minutos) ou parar logo. Parar por iniciativa própria dá pontos de autonomia.
-tut5.title;Privacy;Privacidade
-tut5.text;The game will ask for the camera, microphone and motion, only for the break activities. Nothing is recorded or sent: everything stays on this phone.;O jogo vai pedir acesso à câmara, ao microfone e ao movimento, só para as atividades das pausas. Nada é gravado nem enviado: tudo fica neste telemóvel.
-tut6.title;The grown-ups panel;O painel dos adultos
-tut6.text;You can change the times and activities with the Grown-ups button on the title screen, protected by a times-table question. Set it up now?;Pode mudar os tempos e as atividades no botão Adultos do ecrã inicial, protegido por uma conta de multiplicar. Quer configurar agora?
-btn.next;:play: Next;:play: Seguinte
-btn.skipGuide;Skip guide;Saltar o guia
-btn.setupNow;:gear: Set up now;:gear: Configurar agora
-btn.later;Later;Mais tarde
 gate.title;For grown-ups;Para adultos
 gate.question;What is {a} × {b}?;Quanto é {a} × {b}?
 gate.wrong;Not quite, try again!;Não é bem isso, tenta outra vez!
