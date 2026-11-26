@@ -87,10 +87,14 @@ button .ic { width: 1.8em; height: 1.8em; margin: -0.3em 0; }
 #level { white-space: nowrap; }
 /* time bar takes all the free space */
 #time { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 120px; font-size: 28px; }
+/* #3/#4: the bar is play time left; the notch is where the next break comes. Tap any of these for what it means. */
+#playTime { flex: 1; display: flex; align-items: center; gap: 8px; }
+#time > span, #pet { pointer-events: auto; cursor: help; }
+#breakMark { position: absolute; top: -4px; bottom: -4px; width: 4px; background: var(--mint); display: none; }
 #hud .ic { width: 26px; height: 26px; }
 #timeBar { position: relative; display: block; flex: 1; height: 24px; border: 4px solid #fff; background: #1b1f4bcc; box-shadow: 3px 3px 0 #0006; }
 #timeFill { display: block; height: 100%; width: 0; background: var(--yellow); box-shadow: inset 0 -4px 0 var(--yellow-d); }
-#autoLv { color: var(--mint); white-space: nowrap; }
+#autoLv { color: var(--mint); white-space: nowrap; display: flex; align-items: center; gap: 4px; }
 #timeFill { transition: width .6s; }
 .gain { font-family: var(--pixel); font-size: 13px !important; line-height: 2 !important; color: var(--mint); }
 #clock { min-width: 4.2em; text-align: right; }

@@ -64,7 +64,7 @@ function say(line, m = mood()) {
 const wrap = (name, fn) => { const orig = window[name]; window[name] = (...a) => S.mascot ? fn(orig, ...a) : orig(...a); };
 
 // Activities: done = feed, back = no food (but no scolding either).
-const showBreak = line => { _breakTime(); say(line); };
+const showBreak = (line, keep) => { _breakTime(keep); say(typeof line === 'function' ? line() : line); }; // line() once the activities are picked
 const _breakTime = breakTime;
 // Activities are framed as things you do with Pip: button 'pip.act.<name>', card title 'pip.<name>'.
 ACTS.forEach(a => {
@@ -75,17 +75,17 @@ ACTS.forEach(a => {
     f(() => {
       done(); feed(2);
       say(tr('pip.done.' + k), 'happy'); // what you just did together, not always food
-    }, () => showBreak(tr('pip.stillTired')));
+    }, () => showBreak(tr('pip.stillTired'), true));
     const h2 = $('modal').querySelector('h2');
     h2.innerHTML = icons(tr('pip.' + k, { color: h2.querySelector('b')?.outerHTML, steps: S.steps }));
   };
 });
 
-wrap('breakTime', () => {
+wrap('breakTime', (orig, keep) => {
   if (!ACTS.some(([k]) => S[k])) return;
-  if (!snoozes) feed(-1); // only when the break is due, not each time it comes back after 'Not now'
-  // Pip asks for one of the activities that are on; the list still offers all of them.
-  showBreak(snoozes ? tr('pip.waiting') : tr('pip.ask.' + pick(ACTS.filter(([k]) => S[k]))[0]));
+  if (!snoozes && !keep) feed(-1); // only when the break is due, not each time it comes back after 'Not now'
+  // Pip asks for one of the activities on the card.
+  showBreak(snoozes ? tr('pip.waiting') : () => tr('pip.ask.' + pick(offered)[0]), keep);
 });
 
 wrap('calm', (orig, done, back) => orig(() => { done(); feed(1); say(tr('pip.calmToo'), 'happy'); }, back));
@@ -93,10 +93,9 @@ wrap('calm', (orig, done, back) => orig(() => { done(); feed(1); say(tr('pip.cal
 wrap('timesUp', orig => { orig(); say(tr('pip.sleepy'), 'sleep'); });
 
 wrap('endSession', (orig, msg, saved) => {
-  const late = lateEnd;
   orig(msg, saved);
-  if (!late) feed(1);
-  say(tr(late ? 'pip.lateSleep' : 'pip.onTime'), 'sleep');
+  feed(1);
+  say(tr('pip.onTime'), 'sleep');
 });
 
 wrap('onTick', orig => {
@@ -110,6 +109,7 @@ wrap('onTick', orig => {
 
 wrap('startSession', (orig, ...a) => { step = -1; orig(...a); petHud(); });
 // Choice on the title screen; remembered with the other settings.
+onPress($('pet'), () => toast(tr('hud.petHelp')));
 const choose = on => { S.mascot = on; put('settings', S); showTitle(); };
 onPress($('withPip'), () => choose(true));
 onPress($('noPip'), () => choose(false));

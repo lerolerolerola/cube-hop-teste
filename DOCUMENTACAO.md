@@ -70,11 +70,13 @@ Na barra de cima, da esquerda para a direita:
 | Cubo e número | Cubos apanhados |
 | Nome do nível | Ex. "1 · ALDEIA" (escondido em ecrãs estreitos) |
 | Pip e corações | Só na versão com mascote: a energia do Pip (secção 7) |
-| NV e barra | Nível de autonomia e quanto falta para o próximo (secção 3) |
-| Relógio | Tempo que falta de jogo. Depois de "Acabar este nível", mostra os 2 minutos que faltam |
+| Troféu e NV | Nível de autonomia (secção 3) |
+| Relógio e barra de tempo | A barra esvazia à medida que o tempo de jogo passa; um risco verde marca a próxima pausa. Ao lado, os minutos que faltam |
 | Botão de ferramentas | Só no modo de teste (secção 8) |
 | Botão de respirar | Só aparece quando os controlos estão trocados por um abanão (secção 6) |
 | Som e pausa | Ligar/desligar o som; pausa, com "Continuar" ou "Parar de jogar" |
+
+Tocar no relógio, no troféu ou no Pip mostra uma frase curta a explicar o que é. A frase do relógio ("Faltam 15 min de jogo · Próxima pausa daqui a 5 min") também aparece sozinha no início da sessão e ao voltar de cada pausa.
 
 ---
 
@@ -86,7 +88,7 @@ Início ──► jogar ──► pausa a cada N min ──┬─► faz uma ati
                                           └─► "Parar de jogar por hoje" ──► cartão final
 Muito tempo seguido sem fazer pausa ──► fricção crescente, até fazer uma pausa
 Perto do fim ──► aviso (cores cinzentas, música abranda) ──► "Acabou o tempo!"
-             ──► acabar o nível (máx. 2 min) ou parar ──► cartão final
+             ──► parar (ou +5 min com o adulto) ──► cartão final
 ```
 
 O tempo de jogo do dia fica guardado: parar e carregar em CONTINUAR não reinicia o relógio.
@@ -98,9 +100,8 @@ O tempo de jogo do dia fica guardado: parar e carregar em CONTINUAR não reinici
 | Fazer a pausa logo que é pedida | +3 |
 | Fazer a pausa depois de "Agora não" | +2 |
 | Parar antes de o tempo acabar | +5 |
-| Parar quando o tempo acaba (ou acabar o nível nos 2 min) | +4 |
+| Parar quando o tempo acaba | +4 |
 | Acalmar depois do abanão | +1 |
-| Ser parada à força (não acabou o nível nos 2 min) | 0 |
 
 Os adultos veem o nível e os pontos no painel e podem repor a autonomia.
 
@@ -112,7 +113,7 @@ Princípios que extraímos do artigo *Designing for Disengagement* (Alsheail, Al
 |---|---|
 | **Autonomia** | Botão de pausa com "Parar de jogar" a qualquer momento; a criança escolhe a atividade da pausa ou adia-a ("Agora não"); "Parar de jogar por hoje" em todas as pausas; "Parar aqui" depois de cada nível; a fricção desaparece assim que faz uma pausa |
 | **Transição gradual** | Aviso antes do fim; as cores desvanecem para cinzento e a música abranda |
-| **Conclusão satisfatória** | Quando o tempo acaba, a criança tem 2 minutos para acabar o nível atual e recebe um cartão final |
+| **Conclusão satisfatória** | Aviso antes do fim, cartão final que valoriza o que fez, progresso guardado para a próxima vez |
 | **Continuidade** | O progresso fica guardado (retoma no início do nível), e o tempo de jogo do dia também |
 | **Contexto social** | Painel de adultos (atrás de uma conta de multiplicar); o cartão final diz "Conta a um adulto o que fizeste hoje" |
 | **Evitar manipulação** | Sem prémios por ficar, sem streaks, sem temporizadores que puxam a criança de volta; não há tempo extra |
@@ -121,7 +122,7 @@ Princípios que extraímos do artigo *Designing for Disengagement* (Alsheail, Al
 
 ## 4. Pausas com atividades (os sensores como ferramentas)
 
-A cada N minutos (definido pelo adulto) o jogo para e mostra a lista de atividades. A criança **escolhe** uma. Por baixo, separadas, estão as opções **"Agora não"** (a pausa volta passado 1 minuto) e **"Parar de jogar por hoje"**. Fazer uma atividade põe a zero o contador de tempo seguido sem pausa (secção 5).
+A cada N minutos (definido pelo adulto) o jogo para e mostra **três atividades, uma de cada tipo**: mexer-se (andar), acalmar (respirar ou pousar o telemóvel) e olhar/ouvir (encontrar uma cor ou cantarolar). Assim a escolha é curta e variada. A criança **escolhe** uma. Por baixo, separadas, estão as opções **"Agora não"** (a pausa volta passado 1 minuto) e **"Parar de jogar por hoje"**. Fazer uma atividade põe a zero o contador de tempo seguido sem pausa (secção 5).
 
 | Atividade | O que a criança faz | Sensor | Como o jogo verifica |
 |---|---|---|---|
@@ -133,7 +134,7 @@ A cada N minutos (definido pelo adulto) o jogo para e mostra a lista de atividad
 
 **Porque é que a sesta do telemóvel é diferente:** nas outras atividades a criança continua a usar o telemóvel. Nesta, a pausa é **não usar o telemóvel de todo**. Há um som quando é bem pousado, um som grave se for levantado e um som de vitória no fim, por isso a criança não precisa de olhar para o ecrã.
 
-Em cada atividade, **"Voltar"** regressa à lista sem penalização.
+Em cada atividade, **"Voltar"** regressa à mesma lista sem penalização.
 
 ---
 
@@ -173,9 +174,9 @@ Abanar o telemóvel com raiva troca a esquerda e a direita durante 30 segundos. 
 
 Não há tempo extra nem castigos. Quando acaba o tempo da sessão ou o tempo da semana:
 
-1. **2 minutos antes:** aviso "Está quase na hora de parar! Tenta acabar este nível"; as cores desvanecem para cinzento e a música abranda.
-2. **"Acabou o tempo!"**, com três opções: **Acabar este nível** (tem 2 minutos, que aparecem no relógio), **Parar agora**, ou **+5 min** (só com o adulto).
-3. Se acabar o nível dentro dos 2 minutos, recebe "Acabaste mesmo a tempo!" e o cartão final. Se os 2 minutos passarem, o jogo termina sozinho com o cartão final. O progresso fica guardado no início do nível.
+1. **2 minutos antes:** aviso "Está quase na hora de parar! Faltam 2 min"; as cores desvanecem para cinzento e a música abranda.
+2. **"Acabou o tempo!"** "Por hoje chega. O teu progresso fica guardado." Só há duas opções: **Parar agora** ou **+5 min** (só com o adulto). Não há tempo extra para acabar o nível.
+3. O cartão final mostra o que fez hoje. O progresso fica guardado no início do nível.
 
 ### Tempo diário e semanal
 
@@ -198,16 +199,15 @@ O Pip é um ursinho amarelo que aparece no topo do ecrã (com 5 corações de **
 
 | Situação | O que o Pip diz ou faz | Energia |
 |---|---|---|
-| Chega a hora da pausa | Pede uma das atividades ligadas, ex. "O Pip quer ir passear! Vamos levá-lo a dar uma volta?" (a lista continua a mostrar todas) | −1 (só a primeira vez, não quando volta depois de adiada) |
+| Chega a hora da pausa | Pede uma das atividades ligadas, ex. "O Pip quer ir passear! Vamos levá-lo a dar uma volta?" (a lista continua a mostrar uma de cada tipo) | −1 (só a primeira vez, não quando volta depois de adiada) |
 | Atividade **bem feita** | Uma frase sobre o que fizeram juntos, ex. "Que passeio tão bom! O Pip esticou as patas." / "O Pip adorou a tua música!" (fica contente) | +2 |
 | Desiste da atividade ("Voltar") | "Não faz mal! O Pip ainda está um bocadinho cansado." (sem ralhar) | 0 |
 | Adia a pausa ("Agora não") | Quando a pausa volta: "O Pip ainda está à espera da pausa…" | 0 |
 | Acalma-se depois de um abanão | "O Pip também está calmo" | +1 |
 | Abana o telemóvel com raiva | O Pip fica assustado enquanto os controlos estão trocados | — |
 | Joga muito tempo sem pausa | O Pip fica mais cansado a cada passo da fricção (10, 12, 14, 16 min) | −1 por passo |
-| Para a tempo (qualquer botão de parar, ou acaba o nível nos 2 min) | "Obrigado por parares a tempo! O Pip vai dormir" | +1 |
-| Acabou o tempo | "O Pip está a ficar com sono. Vamos acabar este nível e descansar!" | — |
-| Os 2 minutos para acabar o nível passam | "O Pip vai dormir. Para a próxima, paramos um bocadinho mais cedo!" | 0 |
+| Para a tempo (qualquer botão de parar) | "Obrigado por parares a tempo! O Pip vai dormir" | +1 |
+| Acabou o tempo | "O Pip está com sono. Hora de descansar!" | — |
 
 **Atividades com o Pip:** os nomes mudam para envolver a mascote: *Mostrar uma cor ao Pip* · *Levar o Pip a passear* · *Respirar com o Pip* · *Cantar para o Pip* · *Pôr o Pip a dormir* (pousar o telemóvel = pôr o Pip a dormir).
 

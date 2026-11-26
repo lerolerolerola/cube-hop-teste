@@ -2,7 +2,7 @@ const SHAKE_ANGRY = 18;
 const STILL = 0.8;
 const HUM_LEVEL = 0.04;
 const CALM_SECONDS = 8, HUM_SECONDS = 3;
-const SNOOZE = 60, FINISH = 120, STEP = 120; // s: break comes back after 'Not now'; time to finish the level; gap between friction steps
+const SNOOZE = 60, STEP = 120; // s: break comes back after 'Not now'; gap between friction steps
 const FACE_DOWN = 150, FACE_UP = 120; // |beta| in degrees: flat face down is ±180, gap avoids flicker
 
 const DEFAULTS = {
@@ -47,7 +47,7 @@ const dayLeft = () => (checkDay(), S.session * 60 + day.extra - day.used);
 let auto = { pts: 0, ...get('auto', {}) };
 const need = n => 10 + 5 * n; // points to go from level n+1 to n+2
 function autoLevel() { let n = 0, p = auto.pts; while (p >= need(n)) p -= need(n++); return [n + 1, p / need(n)]; }
-function autoHud() { const [lv, f] = autoLevel(); $('autoLv').textContent = txt('hud.lv', { n: lv }); $('timeFill').style.width = f * 100 + '%'; }
+function autoHud() { $('autoLv').innerHTML = ic('trophy') + ' ' + txt('hud.lv', { n: autoLevel()[0] }); }
 // Adds points and returns the line to show on the card.
 function gain(n) {
   const [before] = autoLevel(); auto.pts += n; put('auto', auto); autoHud();
@@ -77,7 +77,7 @@ function readMic() {
 }
 
 let used = 0, extra = 0, nextBreak = Infinity, warned = false, timeUp = false;
-let sinceBreak = 0, snoozes = 0, streakWarned = false, finishBy = 0, lateEnd = false;
+let sinceBreak = 0, snoozes = 0, streakWarned = false;
 let invertUntil = 0, angry = 0, activityTick = null, lastFilter = '';
 const left = () => Math.min(S.session * 60 + extra - used, S.week * 60 - week.used);
 
@@ -85,13 +85,26 @@ function startSession(level, cubes) {
   checkWeek();
   if (S.week * 60 - week.used <= 0 || dayLeft() <= 0) return showTitle();
   used = day.used; extra = day.extra;
-  sinceBreak = snoozes = finishBy = 0; warned = timeUp = streakWarned = lateEnd = false; invertUntil = 0;
+  sinceBreak = snoozes = 0; warned = timeUp = streakWarned = false; invertUntil = 0;
   nextBreak = S.breakEvery > 0 ? (Math.floor(used / (S.breakEvery * 60)) + 1) * S.breakEvery * 60 : Infinity;
   autoHud();
   $('devBtn').classList.toggle('hidden', !S.dev);
   $('title').classList.add('hidden'); $('hud').classList.remove('hidden'); $('pad').classList.remove('hidden');
   total = cubes; playing = true; closeModal();
-  loadLevel(level);
+  loadLevel(level); timeBar(); setTimeout(timeToast, 4500); // after the level hint
+}
+
+// Top bar: the bar empties as play time runs out; the notch shows when the next break comes.
+function timeBar(l = left()) {
+  const all = Math.max(1, used + Math.max(0, l)), m = $('breakMark');
+  $('timeFill').style.width = Math.max(0, l) / all * 100 + '%';
+  m.style.display = nextBreak < all ? 'block' : 'none';
+  m.style.left = (all - nextBreak) / all * 100 + '%';
+}
+// #4: how much time is left and when the next break is, as a pop-up (also when the time is tapped).
+function timeToast() {
+  const min = Math.max(0, Math.ceil(left() / 60)), next = Math.ceil((nextBreak - used) / 60);
+  toast(nextBreak < used + left() ? tr('hud.timeHelp', { min, next }) : tr('hud.timeHelpNoBreak', { min }));
 }
 
 // Seconds past the no-break limit (negative = still fine).
@@ -105,9 +118,8 @@ function onTick() {
   const l = left();
 
   if (used >= nextBreak && l > S.warn * 60) { nextBreak = Infinity; return breakTime(); }
-  if (!warned && l <= S.warn * 60 && l > 0) { warned = true; toast(tr('toast.almost')); }
+  if (!warned && l <= S.warn * 60 && l > 0) { warned = true; toast(tr('toast.almost', { min: Math.ceil(l / 60) })); }
   if (!timeUp && l <= 0) { timeUp = true; return timesUp(); }
-  if (finishBy && used >= finishBy) { finishBy = 0; lateEnd = true; return endSession('end.rest'); }
 
   // Friction grows with play time since the last break that was done; doing a break clears it.
   const over = noBreak();
@@ -130,7 +142,8 @@ function onTick() {
   $('calmBtn').classList.toggle('hidden', t >= invertUntil);
 
   $('cubes').innerHTML = ic('gem') + ' ' + total;
-  const s = Math.max(0, Math.ceil(finishBy ? finishBy - used : l)); // after time's up: the minutes to finish the level
+  if (t % 15 === 0) timeBar(l);
+  const s = Math.max(0, Math.ceil(l));
   $('clock').textContent = `${s / 60 | 0}:${String(s % 60).padStart(2, '0')}`;
 }
 
@@ -161,14 +174,19 @@ const card = (html, done, back) => modal(html, [[tr('btn.back'), back, 'ghost'],
 
 const ACTS = [['photo', 'act.photo', photo], ['walk', 'act.walk', walk], ['calm', 'act.calm', calm], ['hum', 'act.hum', hum], ['rest', 'act.rest', rest]]; // [setting, label key, card]
 
-function breakTime() {
-  const acts = ACTS.filter(([k]) => S[k]);
+// #11: fewer choices at once, one activity of each kind (moving, calming down, senses), picked from those that are on.
+// keep = coming back from an activity: show the same ones again.
+const KINDS = [['walk'], ['calm', 'rest'], ['photo', 'hum']];
+let offered = [];
+function breakTime(keep = false) {
+  if (!keep || !offered.length) offered = KINDS.map(g => pick(ACTS.filter(([k]) => g.includes(k) && S[k]))).filter(Boolean);
+  const acts = offered;
   if (!acts.length) return;
   const done = () => {
     const g = gain(snoozes ? 2 : 3); // a bit more when the break is taken right away
     sinceBreak = snoozes = 0; streakWarned = false;
     nextBreak = used + S.breakEvery * 60;
-    modal(`<h2>${tr('break.done')}</h2>${g}`, [[tr('btn.backToGame'), closeModal]]);
+    modal(`<h2>${tr('break.done')}</h2>${g}`, [[tr('btn.backToGame'), () => { closeModal(); timeToast(); }]]);
   };
   const notNow = () => { snoozes++; nextBreak = used + SNOOZE; closeModal(); };
   // Activities as a list; skipping or stopping are a separate group under a line.
@@ -176,12 +194,12 @@ function breakTime() {
     [tr('btn.notNow'), notNow, 'ghost'],
     [tr('btn.doneToday'), () => endSession(), 'ghost'],
   ]);
-  addButtons($('acts'), acts.map(([, label, fn]) => [tr(label), () => fn(done, breakTime)]));
+  addButtons($('acts'), acts.map(([, label, fn]) => [tr(label), () => fn(done, () => breakTime(true))]));
 }
 
+// #18: when the time is up the game stops; no extra time to finish the level (only a grown-up can add 5 min).
 function timesUp() {
-  modal(`<h2>${tr('timesUp.title')}</h2><p>${tr('timesUp.text', { min: FINISH / 60 })}</p>`, [
-    [tr('btn.finishLevel'), () => { finishBy = used + FINISH; closeModal(); }],
+  modal(`<h2>${tr('timesUp.title')}</h2><p>${tr('timesUp.text')}</p>`, [
     [tr('btn.stopNow'), () => endSession()],
     [tr('btn.plus5'), () => grownUp(addTime, timesUp), 'ghost'],
   ]);
@@ -189,14 +207,13 @@ function timesUp() {
 
 function addTime() {
   extra += 300; week.used = Math.max(0, week.used - 300);
-  warned = timeUp = false; finishBy = 0;
+  warned = timeUp = false;
   closeModal();
 }
 
 function onLevelDone() {
   const next = (lvl + 1) % LV.length, last = next === 0;
   put(SAVE, { lvl: next, total });
-  if (timeUp) return endSession('end.justInTime', true);
   modal(`<h2>${tr(last ? 'level.allDone' : 'level.done')}</h2><p>${tr('level.saved', { total })}</p>`, [
     [tr(last ? 'btn.playAgain' : 'btn.nextLevel'), () => { loadLevel(next); closeModal(); }],
     [tr('btn.stopHere'), () => endSession('end.great', true)],
@@ -207,8 +224,8 @@ function endSession(msg = 'end.great', saved = false) { // msg: key in languages
   if (!saved) { total = startTotal; put(SAVE, { lvl, total }); }
   put('week', week); saveDay();
   const mins = Math.max(1, Math.round(used / 60));
-  // Stopping on time = autonomy; stopping before the time is up = a bit more. Forced end = nothing.
-  const g = lateEnd ? '' : gain(timeUp ? 4 : 5);
+  // Stopping when the time is up = autonomy; stopping before = a bit more.
+  const g = gain(timeUp ? 4 : 5);
   modal(`<h2>${tr(msg)} :star:</h2>${g}<p>${tr('end.text', { min: mins, total })}</p><p>${tr('end.tell')}</p>`,
     [[tr('btn.home'), showTitle]]);
   playing = false;
@@ -366,7 +383,7 @@ function devCard() {
     [tr('dev.wind'), clock(end - S.warn * 60 + 1)],
     [tr('dev.timeUp'), () => { timeUp = false; clock(end)(); }],
     ...[0, 2, 4, 6].map(m => [tr('dev.noBreak', { min: S.streak + m }), () => { sinceBreak = (S.streak + m) * 60 + 0.5; closeModal(); }]),
-    [tr('dev.reset'), () => { used = extra = sinceBreak = snoozes = finishBy = invertUntil = 0; warned = timeUp = streakWarned = false; for (const k in devFx) devFx[k] = false; closeModal(); }],
+    [tr('dev.reset'), () => { used = extra = sinceBreak = snoozes = invertUntil = 0; warned = timeUp = streakWarned = false; for (const k in devFx) devFx[k] = false; closeModal(); }],
   ]);
   $('modal').querySelector('.btns').insertAdjacentHTML('afterend', `<p>${tr('dev.one')}</p><div class="btns" id="devToggles"></div>`);
   addButtons($('devToggles'), [
@@ -387,5 +404,7 @@ onPress($('resetWeek'), () => {
 onPress($('pause'), () => modal(`<h2>${tr('pause.title')}</h2>`, [[tr('btn.resume'), closeModal], [tr('btn.stopPlaying'), () => endSession()]]));
 onPress($('devBtn'), devCard);
 onPress($('cubes'), () => toast(tr('hud.cubesHelp')));
+onPress($('playTime'), timeToast);
+onPress($('autoLv'), () => toast(tr('hud.autoHelp', { n: autoLevel()[0] })));
 onPress($('calmBtn'), () => calm(() => { invertUntil = 0; modal(`<h2>${tr('calm.fixed')}</h2>${gain(1)}`, [[tr('btn.backToGame'), closeModal]]); }, closeModal));
 showTitle();

@@ -6,6 +6,17 @@ hud.dev;Dev mode;Modo dev
 hud.calm;Calm down;Acalmar
 hud.sound;Sound;Som
 hud.cubes;Cubes;Cubos
+hud.time;Play time;Tempo de jogo
+hud.timeHelp;":clock: {min} min of play left
+Next break in {next} min";":clock: Faltam {min} min de jogo
+Próxima pausa daqui a {next} min"
+hud.timeHelpNoBreak;:clock: {min} min of play left;:clock: Faltam {min} min de jogo
+hud.autoHelp;":trophy: Autonomy level {n}
+You earn points when you stop on your own: taking breaks or stopping in time";":trophy: Nível de autonomia {n}
+Ganhas pontos quando paras por ti: ao fazer as pausas ou ao parar a tempo"
+hud.petHelp;":heart: Pip's energy
+Do the breaks with Pip to give Pip energy";":heart: A energia do Pip
+Faz as pausas com o Pip para lhe dar energia"
 hud.cubesHelp;":gem: Cubes! Collect them in every level.
 You keep them, even when you stop playing.";":gem: Cubos! Apanha-os em todos os níveis.
 Ficam guardados, mesmo quando paras de jogar."
@@ -54,8 +65,8 @@ game.checkpoint;Checkpoint!;Checkpoint!
 auto.gain;+{n} autonomy;+{n} autonomia
 auto.levelUp;:trophy: Autonomy level {n}!;:trophy: Nível de autonomia {n}!
 toast.almost;"Almost time to stop!
-Try to finish this level";"Está quase na hora de parar!
-Tenta acabar este nível"
+{min} min left";"Está quase na hora de parar!
+Faltam {min} min"
 toast.streak;"You have played a long time without a break!
 Do a break to make the game normal again";"Estás a jogar há muito tempo sem pausa!
 Faz uma pausa para o jogo voltar ao normal"
@@ -67,7 +78,6 @@ btn.skip;Skip (PC test);Saltar (teste PC)
 btn.backToGame;:play: Back to the game;:play: Voltar ao jogo
 btn.notNow;:skip: Not now;:skip: Agora não
 btn.doneToday;:flag: Stop playing for today;:flag: Parar de jogar por hoje
-btn.finishLevel;:play: Finish this level;:play: Acabar este nível
 btn.stopNow;:flag: Stop now;:flag: Parar agora
 btn.plus5;+5 min (grown-up);+5 min (adulto)
 btn.playAgain;:play: Play again;:play: Jogar outra vez
@@ -118,15 +128,11 @@ color.green;Green;Verde
 color.blue;Blue;Azul
 color.purple;Purple;Roxo
 timesUp.title;:clock: Time's up!;:clock: Acabou o tempo!
-timesUp.text;"You have {min} minutes to finish this level, or stop now.
-Your progress is saved either way.";"Tens {min} minutos para acabar este nível, ou então podes parar agora.
-O teu progresso fica guardado na mesma."
+timesUp.text;That's all for today. Your progress is saved.;Por hoje chega. O teu progresso fica guardado.
 level.done;:star: Level complete!;:star: Nível completo!
 level.allDone;:trophy: You finished every level!;:trophy: Acabaste todos os níveis!
 level.saved;:gem: {total} cubes · progress saved;:gem: {total} cubos · progresso guardado
 end.great;Great playing!;Jogaste muito bem!
-end.justInTime;You finished just in time!;Acabaste mesmo a tempo!
-end.rest;Time to rest!;Hora de descansar!
 end.weekUsed;This week is used up;A semana está gasta
 end.text;"You played {min} min today and have :gem: {total} cubes.
 Your progress is saved, see you next time!";"Jogaste {min} min hoje e tens :gem: {total} cubos.
@@ -228,8 +234,5 @@ pip.ask.rest;"Pip is sleepy!
 Let's put him to bed?";"O Pip está com sono!
 Vamos pô-lo a dormir?"
 pip.calmToo;Pip feels calm too :smile:;O Pip também está calmo :smile:
-pip.sleepy;"Pip is getting sleepy.
-Let's finish this level and rest!";"O Pip está a ficar com sono.
-Vamos acabar este nível e descansar!"
-pip.lateSleep;Pip is going to sleep. Next time, let's stop a bit earlier!;O Pip vai dormir. Para a próxima, paramos um bocadinho mais cedo!
+pip.sleepy;Pip is sleepy. Time to rest!;O Pip está com sono. Hora de descansar!
 pip.onTime;Thank you for stopping on time! Pip is going to sleep :moon:;Obrigado por parares a tempo! O Pip vai dormir :moon:
