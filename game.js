@@ -3,17 +3,16 @@ const LIGHT = 'rgba(255,255,255,.3)', DARK = 'rgba(0,0,0,.18)', INK = '#1b1f4b';
 
 const $ = id => document.getElementById(id);
 const cv = $('game'), ctx = cv.getContext('2d');
-// Two versions, picked on the title screen (first time: how the phone is held).
+// Two versions, following how the phone is held (computer: horizontal, ?tall forces vertical).
 // Vertical: climbing levels, 12 tiles wide, the view scrolls up. Horizontal: the 6 levels.
-let shape = null; try { shape = localStorage.getItem('cubehop.tall'); } catch {}
-const TALL = new URLSearchParams(location.search).has('tall') ||
-  (shape ? shape === 'true' : matchMedia('(orientation: portrait)').matches && matchMedia('(pointer: coarse)').matches);
+const upright = () => matchMedia('(orientation: portrait)').matches && matchMedia('(pointer: coarse)').matches;
+const TALL = new URLSearchParams(location.search).has('tall') || upright();
 const LV = TALL ? CLIMB_LEVELS : LEVELS, LKEY = TALL ? 'climb' : 'level', SAVE = TALL ? 'saveUp' : 'save';
 document.documentElement.classList.toggle('tall', TALL);
-for (const [id, tall] of [['upright', true], ['sideways', false]]) {
-  $(id).className = tall === TALL ? '' : 'ghost';
-  onPress($(id), () => { try { localStorage.setItem('cubehop.tall', tall); } catch {} if (tall !== TALL) location.reload(); });
-}
+// turning the phone switches version; waits while a card is open (activities move the phone around)
+if (!/[?&]tall\b/.test(location.search)) setInterval(() => {
+  if (upright() !== TALL && $('modal').classList.contains('hidden')) location.reload();
+}, 1000);
 let W = 320, H = 176;
 function resize() {
   if (TALL) { W = 192; H = Math.ceil(W * cv.clientHeight / cv.clientWidth) || 320; }

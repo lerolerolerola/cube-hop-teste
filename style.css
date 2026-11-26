@@ -230,7 +230,7 @@ p .num, .row .num { font-family: var(--digits); font-size: 1.35em; line-height: 
 .petsvg { flex: none; image-rendering: pixelated; }
 .bubble { position: relative; flex: 1; padding: 10px 14px; background: #fff; color: var(--night); font-size: 18px !important; line-height: 1.3 !important; box-shadow: 4px 4px 0 #0006; }
 .bubble::before { content: ''; position: absolute; left: -10px; top: 50%; margin-top: -6px; border: 6px solid transparent; border-right: 4px solid #fff; border-width: 6px 10px 6px 0; }
-#pick button, #shape button { font-size: 12px; padding: 12px 14px; min-height: 44px; }
+#pick button { font-size: 12px; padding: 12px 14px; min-height: 44px; }
 #petTitle { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 
 /* phone held upright: Game Boy layout, HUD on top, the level in a wide band, controls in the space below */
