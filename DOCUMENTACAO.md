@@ -54,6 +54,8 @@ Podem juntar-se: `?mascot&dev&lang=pt`.
 
 **Versão vertical e horizontal:** não há botão: o jogo segue a posição do telemóvel. Com o telemóvel em pé joga-se a versão vertical, deitado a horizontal; ao rodar, o jogo muda de versão (espera se houver um cartão aberto, como uma pausa). No computador é sempre a horizontal. A horizontal tem os 6 níveis acima. A vertical tem **3 níveis a subir** até uma porta lá em cima (1 Torre · 2 Desfiladeiro, que pede salto duplo · 3 Céu, que pede dash), e o nível fica entre a barra de cima e os comandos. Cada versão tem o seu progresso guardado. No computador, `?tall` força a vertical.
 
+**Tutorial (provisório):** na primeira vez que o jogo é aberto aparece um tutorial de 4 passos (Como jogar · As pausas · Autonomia · Tempo de jogo semanal), que também se abre no botão **Como jogar** do ecrã inicial. Os textos ainda estão por escrever (`tut1…tut4` em `languages.csv`). Com `?tutorial` no endereço aparece outra vez.
+
 **Instalar como aplicação:** no iPhone, Safari → Partilhar → *Adicionar ao ecrã principal*; no Android, Chrome → menu → *Instalar aplicação*. Abre em ecrã inteiro, sem as barras do browser, e depois de aberto uma vez funciona sem internet.
 
 - **Cubos:** apanham-se pelos níveis e ficam guardados. Ao apanhar o primeiro aparece uma explicação; tocar no contador de cubos mostra-a outra vez.

@@ -179,6 +179,7 @@ h3 { font-family: var(--pixel); font-size: 13px; line-height: 1.6; font-weight: 
 /* break activities: one per line, icon and text on the left */
 .list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; }
 .list button { justify-content: flex-start; padding: 10px 16px; }
+.card .step { font-family: var(--pixel); font-size: 11px !important; color: var(--mint); } /* tutorial: Passo 2 de 4 */
 .card hr { align-self: stretch; border: 0; border-top: 3px dashed #ffffff44; margin: 4px 0; }
 
 .card {

@@ -27,6 +27,18 @@ title.newGame;NEW GAME;NOVO JOGO
 title.resetTime;:reset: RESET TIME (TEST);:reset: REPOR TEMPO (TESTE)
 title.pcHelp;:laptop: Arrows walk · Space jump · Shift dash · hold E = angry shake · hold F = phone face down;:laptop: Setas para andar · Espaço para saltar · Shift para fazer Dash · Manter E pressionado = Abanar · Manter F pressionado = telemóvel virado para baixo
 title.grownUps;:gear: Grown-ups;:gear: Adultos
+title.howTo;:chat: How to play;:chat: Como jogar
+tut.step;Step {n} of {total};Passo {n} de {total}
+tut1.title;How to play;Como jogar
+tut1.text;[To write: controls and goal of the game];[Por escrever: comandos e objetivo do jogo]
+tut2.title;Breaks;As pausas
+tut2.text;[To write: what happens at a break and the activities];[Por escrever: o que acontece na pausa e as atividades]
+tut3.title;Autonomy;Autonomia
+tut3.text;[To write: what autonomy is and how to earn points];[Por escrever: o que é a autonomia e como se ganham pontos]
+tut4.title;Weekly play time;Tempo de jogo semanal
+tut4.text;[To write: daily session and weekly time];[Por escrever: sessão do dia e tempo por semana]
+btn.next;:play: Next;:play: Seguinte
+btn.skipGuide;Skip;Saltar
 title.autoLevel;:trophy: Autonomy level {n};:trophy: Nível de autonomia {n}
 title.leftToday;Play time left today: {min} min;Tempo de jogo que resta hoje: {min} min
 title.dayUsed;Today's play time is used up. See you tomorrow! :moon:;O tempo de jogo de hoje acabou. Até amanhã! :moon:

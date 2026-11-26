@@ -283,6 +283,17 @@ function showTitle() {
   $('resetWeek').classList.toggle('hidden', wl > 0);
 }
 
+// Tutorial: shows the first time the game opens, and from "Como jogar" on the title screen (?tutorial forces it).
+// ponytail: placeholder texts (tut1… in languages.csv); add a step = a new icon here + its two lines in the CSV
+const GUIDE = ['play', 'clock', 'trophy', 'hourglass'];
+function tutorial(i = 0) {
+  put('tutorial', true);
+  const n = GUIDE.length, last = i === n - 1;
+  modal(`<p class="step">${tr('tut.step', { n: i + 1, total: n })}</p><h2>:${GUIDE[i]}: ${tr(`tut${i + 1}.title`)}</h2><p>${tr(`tut${i + 1}.text`)}</p>`,
+    [[last ? tr('btn.ok') : tr('btn.next'), last ? showTitle : () => tutorial(i + 1)],
+      ...(i ? [[tr('btn.back'), () => tutorial(i - 1), 'ghost']] : []), ...(last ? [] : [[tr('btn.skipGuide'), showTitle, 'ghost']])]);
+}
+
 function calm(done, back) {
   card(`<h2>${tr('calm.title')}</h2><div class="breathe"></div><p id="breath"></p><i class="bar"><b id="prog"></b></i>`, done, back);
   let still = 0;
@@ -396,6 +407,7 @@ function devCard() {
 
 onPress($('continue'), () => { unlock(); const s = get(SAVE, { lvl: 0, total: 0 }); startSession(s.lvl, s.total); });
 onPress($('newGame'), () => { unlock(); startSession(0, 0); });
+onPress($('howTo'), () => tutorial());
 onPress($('parents'), () => grownUp(settingsCard, showTitle));
 onPress($('resetWeek'), () => {
   const reset = () => { week.used = 0; put('week', week); day = {}; put('day', day); showTitle(); };

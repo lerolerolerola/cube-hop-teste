@@ -14,7 +14,7 @@
 <title>Cube Hop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=43">
+<link rel="stylesheet" href="style.css?v=44">
 </head>
 <body>
 <canvas id="game"></canvas>
@@ -48,18 +48,18 @@
     <button id="resetWeek" data-t="title.resetTime"></button>
   </div>
   <p class="pc" data-t="title.pcHelp"></p>
-  <button id="parents" class="ghost" data-t="title.grownUps"></button>
+  <div class="btns"><button id="howTo" class="ghost" data-t="title.howTo"></button><button id="parents" class="ghost" data-t="title.grownUps"></button></div>
 </div>
 
 <div id="modal" class="screen hidden"></div>
 
-<script src="lang.js?v=43"></script>
-<script src="levels.js?v=43"></script>
-<script src="icons.js?v=43"></script>
+<script src="lang.js?v=44"></script>
+<script src="levels.js?v=44"></script>
+<script src="icons.js?v=44"></script>
 <script>for (const e of document.querySelectorAll('#hud, #pad, #title')) e.innerHTML = icons(e.innerHTML); applyText();</script>
-<script src="game.js?v=43"></script>
-<script src="session.js?v=43"></script>
-<script src="mascot.js?v=43"></script>
+<script src="game.js?v=44"></script>
+<script src="session.js?v=44"></script>
+<script src="mascot.js?v=44"></script>
 <script>
 // A file that didn't load (weak connection) leaves a blue screen with the D-pad icons as text: reload once.
 try {
@@ -68,6 +68,7 @@ try {
   } else sessionStorage.removeItem('retried');
 } catch {}
 navigator.serviceWorker?.register('sw.js').catch(() => {});
+if (typeof tutorial === 'function' && (!get('tutorial', false) || new URLSearchParams(location.search).has('tutorial'))) tutorial();
 </script>
 </body>
 </html>
