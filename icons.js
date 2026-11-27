@@ -45,7 +45,7 @@ const ICONS = {
   bed: 'M2 4h2v16H2zm18 6h2v10h-2z M2 16h20v2H2zm2-8h16v2H4zm2 2h2v6H6z',
   full: 'M5 4h5v2h4V4h5v2h2v6h-2v2h-2v2h-2v2h-2v2h-2v-2H9v-2H7v-2H5v-2H3V6h2z', // filled heart (ours)
 };
-// :gem: is the cube you collect, drawn like in the game: light top, yellow front, dark side.
-const CUBE = '<svg class="ic" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect width="8" height="3" fill="#fff3a6"/><rect y="3" width="5" height="5" fill="#ffd84a"/><rect x="5" y="3" width="3" height="5" fill="#d99a1e"/></svg>';
+// :gem: is the coin you collect, drawn like in the game: a pixel circle, dark rim, yellow inside, a shine.
+const CUBE = '<svg class="ic" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#d99a1e" d="M2 0h4v1h1v1h1v4H7v1H6v1H2V7H1V6H0V2h1V1h1z"/><path fill="#ffd84a" d="M2 1h4v1h1v4H6v1H2V6H1V2h1z"/><rect x="2" y="2" width="1" height="2" fill="#fff3a6"/></svg>';
 const ic = n => n === 'gem' ? CUBE : `<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${ICONS[n]}"/></svg>`;
 const icons = s => String(s).replace(/:([a-z]+):/g, (m, n) => ICONS[n] || n === 'gem' ? ic(n) : m);

@@ -258,10 +258,14 @@ function drawTile(L, c, x, y) {
     rect(X + 7, Y + 1, 2, 15, '#ece3d0');
     rect(X + 9, Y + 2, 6, 5, c === 'f' ? '#ffd84a' : '#8a8fb0');
   } else if (c === 'o') {
-    const cy = Y + 4 + Math.round(Math.sin(t * 0.08 + x) * 2), lw = Math.round(4 + 3.5 * Math.sin(t * 0.06 + x));
-    rect(X + 4, cy, 8, 3, '#fff3a6');
-    rect(X + 4, cy + 3, lw, 5, '#ffd84a');
-    rect(X + 4 + lw, cy + 3, 8 - lw, 5, '#d99a1e');
+    // round coin, spinning: each pixel row of the circle narrows with the turn
+    const cy = Y + 4 + Math.round(Math.sin(t * 0.08 + x) * 2), s = Math.abs(Math.cos(t * 0.05 + x));
+    [4, 6, 8, 8, 8, 8, 6, 4].forEach((w, r) => {
+      const n = Math.max(2, Math.round(w * s)), cx = X + 8 - n / 2 | 0;
+      rect(cx, cy + r, n, 1, '#d99a1e');
+      if (n > 2 && r && r < 7) rect(cx + 1, cy + r, n - 2, 1, '#ffd84a');
+    });
+    if (s > 0.5) rect(X + 6, cy + 2, 1, 2, '#fff3a6');
   } else if (c === 'D') {
     rect(X - 2, Y - 8, T + 4, T + 8, '#ece3d0'); rect(X, Y - 10, T, 2, '#ece3d0');
     rect(X + 2, Y - 6, T - 4, T + 6, '#2a1f3d'); rect(X + 4, Y - 8, T - 8, 2, '#2a1f3d');

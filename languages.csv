@@ -5,7 +5,7 @@ hud.autonomy;Autonomy;Autonomia
 hud.dev;Dev mode;Modo dev
 hud.calm;Calm down;Acalmar
 hud.sound;Sound;Som
-hud.cubes;Cubes;Cubos
+hud.cubes;Coins;Moedas
 hud.time;Play time;Tempo de jogo
 hud.timeHelp;":clock: {min} min of play left
 Next break in {next} min";":clock: Faltam {min} min de jogo
@@ -17,9 +17,9 @@ Ganhas pontos quando paras por ti: ao fazer as pausas ou ao parar a tempo"
 hud.petHelp;":heart: Pip's energy
 Do the breaks with Pip to give Pip energy";":heart: A energia do Pip
 Faz as pausas com o Pip para lhe dar energia"
-hud.cubesHelp;":gem: Cubes! Collect them in every level.
-You keep them, even when you stop playing.";":gem: Cubos! Apanha-os em todos os níveis.
-Ficam guardados, mesmo quando paras de jogar."
+hud.cubesHelp;":gem: Coins! Collect them in every level.
+You keep them, even when you stop playing.";":gem: Moedas! Apanha-as em todos os níveis.
+Ficam guardadas, mesmo quando paras de jogar."
 title.withPip;WITH PIP;COM O PIP
 title.noPip;NO MASCOT;SEM MASCOTE
 title.continue;:play: CONTINUE;:play: CONTINUAR
@@ -141,11 +141,11 @@ timesUp.title;:clock: Time's up!;:clock: Acabou o tempo!
 timesUp.text;That's all for today. Your progress is saved.;Por hoje chega. O teu progresso fica guardado.
 level.done;:star: Level complete!;:star: Nível completo!
 level.allDone;:trophy: You finished every level!;:trophy: Acabaste todos os níveis!
-level.saved;:gem: {total} cubes · progress saved;:gem: {total} cubos · progresso guardado
+level.saved;:gem: {total} coins · progress saved;:gem: {total} moedas · progresso guardado
 end.great;Great playing!;Jogaste muito bem!
 end.weekUsed;This week is used up;A semana está gasta
-end.text;"You played {min} min today and have :gem: {total} cubes.
-Your progress is saved, see you next time!";"Jogaste {min} min hoje e tens :gem: {total} cubos.
+end.text;"You played {min} min today and have :gem: {total} coins.
+Your progress is saved, see you next time!";"Jogaste {min} min hoje e tens :gem: {total} moedas.
 O teu progresso está guardado, até à próxima!"
 end.tell;:chat: Tell a grown-up what you did today;:chat: Conta a um adulto o que fizeste hoje
 pause.title;:pause: Paused;:pause: Em pausa

@@ -58,7 +58,7 @@ Podem juntar-se: `?mascot&dev&lang=pt`.
 
 **Instalar como aplicação:** no iPhone, Safari → Partilhar → *Adicionar ao ecrã principal*; no Android, Chrome → menu → *Instalar aplicação*. Abre em ecrã inteiro, sem as barras do browser, e depois de aberto uma vez funciona sem internet.
 
-- **Cubos:** apanham-se pelos níveis e ficam guardados. Ao apanhar o primeiro aparece uma explicação; tocar no contador de cubos mostra-a outra vez.
+- **Moedas:** redondas, apanham-se pelos níveis e ficam guardadas. Ao apanhar a primeira aparece uma explicação; tocar no contador de moedas mostra-a outra vez.
 - **Checkpoint (bandeira):** ativa ao passar pela coluna da bandeira, mesmo a saltar por cima. Ao morrer, volta-se ao último checkpoint.
 - **Depois de morrer:** durante 2 segundos os inimigos não fazem mal (o boneco pisca), para um inimigo parado em cima do checkpoint não matar a criança sem parar. Espinhos e quedas continuam a matar.
 - **Progresso:** fica guardado no início de cada nível.
@@ -69,7 +69,7 @@ Na barra de cima, da esquerda para a direita:
 
 | Elemento | O que mostra |
 |---|---|
-| Cubo e número | Cubos apanhados |
+| Moeda e número | Moedas apanhadas |
 | Nome do nível | Ex. "1 · ALDEIA" (escondido em ecrãs estreitos) |
 | Pip e corações | Só na versão com mascote: a energia do Pip (secção 7) |
 | Troféu e NV | Nível de autonomia (secção 3) |
@@ -188,8 +188,8 @@ O tempo de cada sessão conta por dia e o total conta por semana (na versão fin
 
 ## 6. Ecrãs finais
 
-- **Nível completo:** mostra os cubos e que o progresso está guardado, com "Próximo nível" ou "Parar aqui".
-- **Cartão final:** minutos jogados hoje, cubos, pontos de autonomia ganhos e "Conta a um adulto o que fizeste hoje".
+- **Nível completo:** mostra as moedas e que o progresso está guardado, com "Próximo nível" ou "Parar aqui".
+- **Cartão final:** minutos jogados hoje, moedas, pontos de autonomia ganhos e "Conta a um adulto o que fizeste hoje".
 
 ---
 
@@ -303,7 +303,7 @@ e ir a `http://localhost:8000/?dev`. Para testar sensores no telemóvel é preci
 | `lang.js` | Lê o CSV; `tr('chave')` devolve o texto na língua do jogo |
 | `lang.test.js` | Verificação: `node lang.test.js` confirma que todos os textos usados existem no CSV |
 | `icons.js` | Ícones em pixel art; escreve-se `:nome:` no texto (ex. `:play:`) |
-| `levels.js` | Os 6 níveis em texto (`#` chão, `B` tijolo, `o` cubo, `^` espinhos, `E` inimigo, `F` checkpoint, `D` porta, `P` início) e as cores de cada um; `CLIMB_LEVELS` são os 3 níveis a subir (12 blocos de largura) |
+| `levels.js` | Os 6 níveis em texto (`#` chão, `B` tijolo, `o` moeda, `^` espinhos, `E` inimigo, `F` checkpoint, `D` porta, `P` início) e as cores de cada um; `CLIMB_LEVELS` são os 3 níveis a subir (12 blocos de largura) |
 | `game.js` | Motor do jogo: física, desenho, som, comandos |
 | `session.js` | Tudo o que é sessão: tempo, pausas, atividades, fricção, painel dos adultos, modo de teste |
 | `mascot.js` | Versão com mascote. Envolve funções do `session.js` sem as alterar; com a mascote desligada o jogo é igual à versão base |
